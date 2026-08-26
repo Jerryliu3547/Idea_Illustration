@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/navigation/Sidebar";
+import { BackToTop } from "@/components/ui/BackToTop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,8 +28,9 @@ export default function RootLayout({
     <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="bg-[#090d16] text-slate-100 min-h-screen antialiased flex flex-col md:flex-row">
         <Sidebar />
-        <main className="flex-1 min-w-0 overflow-y-auto">
+        <main className="flex-1 min-w-0 overflow-y-auto relative">
           {children}
+          <BackToTop />
         </main>
       </body>
     </html>

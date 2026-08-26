@@ -25,7 +25,11 @@ import {
   BookOpen,
   ZoomIn,
   Maximize2,
-  X
+  X,
+  Video,
+  ExternalLink,
+  Bookmark,
+  ArrowUp
 } from 'lucide-react';
 
 export const KLDivergenceVisualizer: React.FC = () => {
@@ -177,8 +181,58 @@ export const KLDivergenceVisualizer: React.FC = () => {
         </p>
       </div>
 
+      {/* QUICK SECTION BOOKMARK NAVIGATION BAR */}
+      <div className="sticky top-2 z-30 bg-slate-950/95 backdrop-blur-md border border-cyan-500/40 rounded-2xl p-4 shadow-2xl space-y-2.5">
+        <div className="flex items-center gap-2 text-xs font-mono font-bold text-cyan-400">
+          <Bookmark className="h-4 w-4 text-cyan-400" />
+          <span>Quick Section Bookmarks:</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+          <button
+            onClick={() => document.getElementById('section-math-formulations')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-cyan-500/20 text-slate-200 hover:text-cyan-300 border border-slate-800 hover:border-cyan-500/40 transition-all flex items-center justify-start gap-2.5 text-left"
+          >
+            <BookOpen className="h-4 w-4 text-cyan-400 shrink-0" />
+            <span className="font-semibold">1. Core Mathematical Formulations</span>
+          </button>
+
+          <button
+            onClick={() => document.getElementById('section-information-theory')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-purple-500/20 text-slate-200 hover:text-purple-300 border border-slate-800 hover:border-purple-500/40 transition-all flex items-center justify-start gap-2.5 text-left"
+          >
+            <Calculator className="h-4 w-4 text-purple-400 shrink-0" />
+            <span className="font-semibold">2. Entropy & Cross-Entropy Identity</span>
+          </button>
+
+          <button
+            onClick={() => document.getElementById('section-discrete-example')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-cyan-500/20 text-slate-200 hover:text-cyan-300 border border-slate-800 hover:border-cyan-500/40 transition-all flex items-center justify-start gap-2.5 text-left"
+          >
+            <Dices className="h-4 w-4 text-cyan-400 shrink-0" />
+            <span className="font-semibold">3. Discrete Example: Unbalanced Die</span>
+          </button>
+
+          <button
+            onClick={() => document.getElementById('section-continuous-drift')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-emerald-500/20 text-slate-200 hover:text-emerald-300 border border-slate-800 hover:border-emerald-500/40 transition-all flex items-center justify-start gap-2.5 text-left"
+          >
+            <Sliders className="h-4 w-4 text-emerald-400 shrink-0" />
+            <span className="font-semibold">4. Continuous Drift & KL Penalty Graph</span>
+          </button>
+
+          <button
+            onClick={() => document.getElementById('section-video-guide')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-red-500/20 text-slate-200 hover:text-red-300 border border-slate-800 hover:border-red-500/40 transition-all flex items-center justify-start gap-2.5 text-left sm:col-span-2"
+          >
+            <Video className="h-4 w-4 text-red-500 shrink-0" />
+            <span className="font-semibold">5. KL Divergence In-Depth Video Walkthrough</span>
+          </button>
+        </div>
+      </div>
+
       {/* TOP FEATURED MATHEMATICAL FORMULA CARD */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-cyan-500/40 bg-gradient-to-br from-cyan-950/20 via-slate-900/60 to-purple-950/20 shadow-xl">
+      <div id="section-math-formulations" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-cyan-500/40 bg-gradient-to-br from-cyan-950/20 via-slate-900/60 to-purple-950/20 shadow-xl">
         <div className="flex items-center justify-between border-b border-slate-800 pb-3">
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-cyan-400" /> Core Mathematical Formulations
@@ -235,7 +289,7 @@ export const KLDivergenceVisualizer: React.FC = () => {
       </div>
 
       {/* INFORMATION THEORY TRINITY: ENTROPY, CROSS-ENTROPY & KL DIVERGENCE */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-indigo-500/40 bg-gradient-to-br from-indigo-950/20 via-slate-900/70 to-blue-950/20 shadow-xl">
+      <div id="section-information-theory" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-indigo-500/40 bg-gradient-to-br from-indigo-950/20 via-slate-900/70 to-blue-950/20 shadow-xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div>
             <span className="text-xs font-mono font-bold text-indigo-400 uppercase tracking-wider block mb-1">
@@ -455,7 +509,7 @@ export const KLDivergenceVisualizer: React.FC = () => {
       </div>
 
       {/* SECTION 1: SIMPLE CONCRETE DISCRETE EXAMPLE (UNBALANCED DIE) */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-cyan-500/30 bg-cyan-950/10">
+      <div id="section-discrete-example" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-cyan-500/30 bg-cyan-950/10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
             <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider block mb-1">
@@ -637,7 +691,7 @@ export const KLDivergenceVisualizer: React.FC = () => {
       </div>
 
       {/* SECTION 2: LLM POLICY REGULARIZATION & REWARD HACKING */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6">
+      <div id="section-continuous-drift" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6">
         <div>
           <span className="text-xs font-mono font-bold text-indigo-400 uppercase tracking-wider block mb-1">
             LLM POLICY REGULARIZATION IN RLHF
@@ -810,6 +864,57 @@ export const KLDivergenceVisualizer: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* RECOMMENDED VIDEO TUTORIAL / YOUTUBE DEEP DIVE */}
+      <div id="section-video-guide" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-red-500/40 bg-gradient-to-br from-red-950/20 via-slate-900/80 to-purple-950/20 shadow-2xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div>
+            <span className="text-xs font-mono font-bold text-red-400 uppercase tracking-wider block mb-1 flex items-center gap-1.5">
+              <Video className="h-4 w-4 text-red-500" /> VIDEO EXPLAINER & DEEP DIVE
+            </span>
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+              KL Divergence In-Depth Video Walkthrough
+            </h2>
+            <p className="text-xs text-slate-300 mt-1">
+              Watch this comprehensive video guide explaining Kullback-Leibler (KL) Divergence, Information Entropy, and Relative Entropy.
+            </p>
+          </div>
+          <a
+            href="https://www.youtube.com/watch?v=KHVR587oW8I"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-xl text-xs font-mono font-bold bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/40 transition-all flex items-center gap-2 self-start md:self-auto shrink-0"
+          >
+            <ExternalLink className="h-4 w-4 text-red-400" />
+            <span>Open on YouTube</span>
+          </a>
+        </div>
+
+        {/* Embedded YouTube Video Player */}
+        <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-red-500/30 bg-slate-950 shadow-2xl">
+          <iframe
+            src="https://www.youtube.com/embed/KHVR587oW8I"
+            title="KL Divergence Explained Video Tutorial"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="w-full h-full rounded-2xl border-0"
+          />
+        </div>
+      </div>
+
+      {/* Footer Back to Top Button Bar */}
+      <div className="flex justify-center pt-2">
+        <button
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.querySelector('main')?.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-800 hover:border-cyan-500/40 font-mono text-xs font-bold transition-all flex items-center gap-2 shadow-lg"
+        >
+          <ArrowUp className="h-4 w-4 text-cyan-400" />
+          <span>Back to Top</span>
+        </button>
       </div>
 
       {/* Lightbox / Modal for Enlarged Image View */}

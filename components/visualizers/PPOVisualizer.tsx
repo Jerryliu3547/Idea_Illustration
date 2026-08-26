@@ -42,7 +42,8 @@ import {
   Bookmark,
   Video,
   Play,
-  ExternalLink
+  ExternalLink,
+  ArrowUp
 } from 'lucide-react';
 
 export const PPOVisualizer: React.FC = () => {
@@ -1910,6 +1911,20 @@ export const PPOVisualizer: React.FC = () => {
             className="w-full h-full rounded-2xl border-0"
           />
         </div>
+      </div>
+
+      {/* Footer Back to Top Button Bar */}
+      <div className="flex justify-center pt-2">
+        <button
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.querySelector('main')?.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-indigo-500/20 text-slate-300 hover:text-indigo-300 border border-slate-800 hover:border-indigo-500/40 font-mono text-xs font-bold transition-all flex items-center gap-2 shadow-lg"
+        >
+          <ArrowUp className="h-4 w-4 text-indigo-400" />
+          <span>Back to Top</span>
+        </button>
       </div>
 
       {/* Lightbox / Modal for Enlarged Schematic View */}
