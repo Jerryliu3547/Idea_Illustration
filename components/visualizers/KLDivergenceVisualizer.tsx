@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { MathFormula } from '@/components/ui/MathFormula';
+import { getAssetPath } from '@/lib/asset';
 import { 
   ResponsiveContainer, 
   AreaChart, 
@@ -266,11 +267,11 @@ export const KLDivergenceVisualizer: React.FC = () => {
                 </span>
               </div>
               <div 
-                onClick={() => setActiveModalImage({ src: '/entropy_diagram.png', title: 'Entropy H(p) - Infographic' })}
+                onClick={() => setActiveModalImage({ src: getAssetPath('/entropy_diagram.png'), title: 'Entropy H(p) - Infographic' })}
                 className="group relative cursor-pointer overflow-hidden rounded-xl border border-cyan-500/30 my-2 bg-slate-900/60 shadow-lg"
               >
                 <img 
-                  src="/entropy_diagram.png" 
+                  src={getAssetPath('/entropy_diagram.png')} 
                   alt="Entropy Concept Diagram" 
                   className="w-full h-44 object-cover group-hover:scale-125 transition-transform duration-500 ease-out" 
                 />
@@ -303,11 +304,11 @@ export const KLDivergenceVisualizer: React.FC = () => {
                 </span>
               </div>
               <div 
-                onClick={() => setActiveModalImage({ src: '/cross_entropy_diagram.png', title: 'Cross-Entropy H(p, q) - Infographic' })}
+                onClick={() => setActiveModalImage({ src: getAssetPath('/cross_entropy_diagram.png'), title: 'Cross-Entropy H(p, q) - Infographic' })}
                 className="group relative cursor-pointer overflow-hidden rounded-xl border border-purple-500/30 my-2 bg-slate-900/60 shadow-lg"
               >
                 <img 
-                  src="/cross_entropy_diagram.png" 
+                  src={getAssetPath('/cross_entropy_diagram.png')} 
                   alt="Cross-Entropy Concept Diagram" 
                   className="w-full h-44 object-cover group-hover:scale-125 transition-transform duration-500 ease-out" 
                 />
@@ -340,11 +341,11 @@ export const KLDivergenceVisualizer: React.FC = () => {
                 </span>
               </div>
               <div 
-                onClick={() => setActiveModalImage({ src: '/kl_divergence_diagram.png', title: 'KL Divergence D_KL(p || q) - Infographic' })}
+                onClick={() => setActiveModalImage({ src: getAssetPath('/kl_divergence_diagram.png'), title: 'KL Divergence D_KL(p || q) - Infographic' })}
                 className="group relative cursor-pointer overflow-hidden rounded-xl border border-emerald-500/30 my-2 bg-slate-900/60 shadow-lg"
               >
                 <img 
-                  src="/kl_divergence_diagram.png" 
+                  src={getAssetPath('/kl_divergence_diagram.png')} 
                   alt="KL Divergence Concept Diagram" 
                   className="w-full h-44 object-cover group-hover:scale-125 transition-transform duration-500 ease-out" 
                 />

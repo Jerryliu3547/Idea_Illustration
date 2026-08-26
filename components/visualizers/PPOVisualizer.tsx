@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { MathFormula } from '@/components/ui/MathFormula';
+import { getAssetPath } from '@/lib/asset';
 import { 
   ResponsiveContainer, 
   LineChart, 
@@ -142,13 +143,13 @@ export const PPOVisualizer: React.FC = () => {
         <div className="space-y-3">
           <div 
             onClick={() => setActiveModalImage({ 
-              src: '/ppo_vs_grpo_schematic.png', 
+              src: getAssetPath('/ppo_vs_grpo_schematic.png'), 
               title: 'PPO vs. GRPO Architectural Comparison Schematic' 
             })}
             className="group relative cursor-pointer overflow-hidden rounded-2xl border border-indigo-500/30 bg-slate-950 shadow-2xl"
           >
             <img 
-              src="/ppo_vs_grpo_schematic.png" 
+              src={getAssetPath('/ppo_vs_grpo_schematic.png')} 
               alt="PPO vs GRPO Schematic" 
               className="w-full max-h-[480px] object-contain group-hover:scale-105 transition-transform duration-500 ease-out py-2" 
             />
