@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
@@ -13,48 +13,67 @@ import {
   Brain,
   Menu,
   X,
-  Sparkles
+  Sparkles,
+  ChevronDown,
+  ChevronRight,
+  Folder,
+  FolderOpen,
+  Cpu,
+  BarChart3,
+  Layers,
+  ListTree
 } from 'lucide-react';
 
-interface NavSubItem {
+interface NavTreeSubItem {
   name: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   badge?: string;
-  desc?: string;
   color?: string;
 }
 
-interface NavCategoryGroup {
+interface NavTreeCategory {
+  id: string;
   category: string;
-  items: NavSubItem[];
-}
-
-interface NavSingleItem {
-  name: string;
-  href: string;
   icon: React.ComponentType<{ className?: string }>;
-  description?: string;
+  color: string;
+  items: NavTreeSubItem[];
 }
 
-type NavGroupItem = NavCategoryGroup | NavSingleItem;
-
-const navigationItems: NavGroupItem[] = [
+const treeNavigation: NavTreeCategory[] = [
   {
-    name: 'Overview Dashboard',
-    href: '/',
-    icon: LayoutDashboard,
-    description: 'All RL concepts at a glance',
+    id: 'llm-basics',
+    category: 'LLM Basics',
+    icon: Cpu,
+    color: 'text-amber-400',
+    items: [
+      {
+        name: 'Transformer Architecture',
+        href: '/llm-basics/transformer',
+        icon: Cpu,
+        badge: 'Attention',
+        color: 'text-cyan-400',
+      },
+      {
+        name: 'Softmax & Temperature',
+        href: '/llm-basics/softmax',
+        icon: BarChart3,
+        badge: 'Sampling',
+        color: 'text-amber-400',
+      },
+    ],
   },
   {
+    id: 'rl-in-llms',
     category: 'Reinforcement Learning in LLMs',
+    icon: Workflow,
+    color: 'text-purple-400',
     items: [
       {
         name: 'RLHF Pipeline',
         href: '/rlhf',
         icon: Workflow,
         badge: '3 Stages',
-        desc: 'SFT -> Reward Model -> PPO Policy',
         color: 'text-amber-400',
       },
       {
@@ -62,7 +81,6 @@ const navigationItems: NavGroupItem[] = [
         href: '/ppo',
         icon: Sliders,
         badge: 'Clipping',
-        desc: 'Proximal Policy Optimization & Ratio Clipping',
         color: 'text-indigo-400',
       },
       {
@@ -70,7 +88,6 @@ const navigationItems: NavGroupItem[] = [
         href: '/dpo',
         icon: GitCompare,
         badge: 'Direct Policy',
-        desc: 'Direct Preference Optimization & Log-Prob Shift',
         color: 'text-emerald-400',
       },
       {
@@ -78,7 +95,6 @@ const navigationItems: NavGroupItem[] = [
         href: '/grpo',
         icon: Users,
         badge: 'DeepSeek R1',
-        desc: 'Group Relative Policy Optimization',
         color: 'text-purple-400',
       },
       {
@@ -86,7 +102,43 @@ const navigationItems: NavGroupItem[] = [
         href: '/kl-divergence',
         icon: Activity,
         badge: 'Constraint',
-        desc: 'Distribution Shift & Reward Hacking Control',
+        color: 'text-cyan-400',
+      },
+    ],
+  },
+  {
+    id: 'peft',
+    category: 'Parameter Efficient Fine-Tuning',
+    icon: Layers,
+    color: 'text-emerald-400',
+    items: [
+      {
+        name: 'LoRA & QLoRA',
+        href: '/peft/lora',
+        icon: Layers,
+        badge: 'Rank Adaptation',
+        color: 'text-emerald-400',
+      },
+    ],
+  },
+  {
+    id: 'reasoning',
+    category: 'Reasoning & Chain of Thoughts',
+    icon: ListTree,
+    color: 'text-cyan-400',
+    items: [
+      {
+        name: 'Chain of Thought (CoT)',
+        href: '/reasoning/chain-of-thought',
+        icon: Brain,
+        badge: 'Decomposition',
+        color: 'text-purple-400',
+      },
+      {
+        name: 'Tree of Thoughts (ToT)',
+        href: '/reasoning/tree-of-thoughts',
+        icon: ListTree,
+        badge: 'Tree Search',
         color: 'text-cyan-400',
       },
     ],
@@ -97,8 +149,32 @@ export const Sidebar: React.FC = () => {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Tree expansion state: Default all categories to open
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
+    'llm-basics': true,
+    'rl-in-llms': true,
+    'peft': true,
+    'reasoning': true,
+  });
+
+  // Auto expand category folder if user is currently visiting a route inside it
+  useEffect(() => {
+    treeNavigation.forEach((cat) => {
+      if (cat.items.some((item) => pathname === item.href)) {
+        setExpandedCategories((prev) => ({ ...prev, [cat.id]: true }));
+      }
+    });
+  }, [pathname]);
+
+  const toggleCategory = (catId: string) => {
+    setExpandedCategories((prev) => ({
+      ...prev,
+      [catId]: !prev[catId],
+    }));
+  };
+
   const sidebarContent = (
-    <div className="flex h-full flex-col justify-between p-4">
+    <div className="flex h-full flex-col justify-between p-4 overflow-y-auto">
       <div className="space-y-6">
         {/* Brand Header */}
         <Link 
@@ -119,37 +195,77 @@ export const Sidebar: React.FC = () => {
           </div>
         </Link>
 
-        {/* Navigation Section */}
-        <nav className="space-y-6">
-          {navigationItems.map((group, idx) => (
-            <div key={idx} className="space-y-2">
-              {'category' in group ? (
-                <div>
-                  <h2 className="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
-                    {group.category}
-                  </h2>
-                  <div className="mt-2 space-y-1">
-                    {group.items.map((item) => {
+        {/* Dashboard Overview Home Link */}
+        <Link
+          href="/"
+          onClick={() => setMobileOpen(false)}
+          className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+            pathname === '/'
+              ? 'bg-slate-800 text-white border border-slate-700 shadow-md shadow-indigo-500/10'
+              : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200'
+          }`}
+        >
+          <LayoutDashboard className="h-4 w-4 text-indigo-400 shrink-0" />
+          <span className="font-semibold">Overview Dashboard</span>
+        </Link>
+
+        {/* Tree Directory Navigation */}
+        <nav className="space-y-4">
+          {treeNavigation.map((cat) => {
+            const isExpanded = !!expandedCategories[cat.id];
+            const hasActiveChild = cat.items.some((item) => pathname === item.href);
+
+            return (
+              <div key={cat.id} className="space-y-1">
+                {/* Tree Category Folder Header */}
+                <button
+                  onClick={() => toggleCategory(cat.id)}
+                  className={`w-full flex items-center justify-between px-3 py-2 text-xs font-bold font-mono uppercase tracking-wider rounded-xl transition-colors ${
+                    hasActiveChild ? 'text-white bg-slate-900/60' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/40'
+                  }`}
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    {isExpanded ? (
+                      <FolderOpen className={`h-4 w-4 shrink-0 ${cat.color}`} />
+                    ) : (
+                      <Folder className="h-4 w-4 shrink-0 text-slate-500" />
+                    )}
+                    <span className="truncate">{cat.category}</span>
+                  </div>
+
+                  {isExpanded ? (
+                    <ChevronDown className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+                  ) : (
+                    <ChevronRight className="h-3.5 w-3.5 text-slate-500 shrink-0" />
+                  )}
+                </button>
+
+                {/* Sub-Items Tree Branch */}
+                {isExpanded && (
+                  <div className="pl-4 ml-3 border-l border-slate-800/80 space-y-1 pt-0.5">
+                    {cat.items.map((item) => {
                       const isActive = pathname === item.href;
                       const Icon = item.icon;
+
                       return (
                         <Link
                           key={item.href}
                           href={item.href}
                           onClick={() => setMobileOpen(false)}
-                          className={`flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+                          className={`flex items-center justify-between rounded-xl px-3 py-2 text-xs font-medium transition-all ${
                             isActive
-                              ? 'bg-slate-800/90 text-white border border-slate-700/80 shadow-md shadow-indigo-500/10'
+                              ? 'bg-slate-800 text-white border border-slate-700/80 shadow-md shadow-indigo-500/10'
                               : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200'
                           }`}
                         >
-                          <div className="flex items-center gap-3 min-w-0">
-                            <Icon className={`h-4 w-4 shrink-0 ${isActive ? item.color : 'text-slate-400'}`} />
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <Icon className={`h-3.5 w-3.5 shrink-0 ${isActive ? item.color : 'text-slate-500'}`} />
                             <span className="truncate">{item.name}</span>
                           </div>
+
                           {item.badge && (
-                            <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
-                              isActive ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : 'bg-slate-800 text-slate-400'
+                            <span className={`text-[9px] px-2 py-0.5 rounded-full font-mono font-bold ${
+                              isActive ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : 'bg-slate-900 text-slate-500'
                             }`}>
                               {item.badge}
                             </span>
@@ -158,34 +274,21 @@ export const Sidebar: React.FC = () => {
                       );
                     })}
                   </div>
-                </div>
-              ) : (
-                <Link
-                  href={group.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
-                    pathname === group.href
-                      ? 'bg-slate-800 text-white border border-slate-700'
-                      : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200'
-                  }`}
-                >
-                  <LayoutDashboard className="h-4 w-4 text-indigo-400" />
-                  <span>{group.name}</span>
-                </Link>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            );
+          })}
         </nav>
       </div>
 
       {/* Footer Info */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-3 text-xs text-slate-400">
+      <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-3 text-xs text-slate-400 mt-6">
         <div className="flex items-center justify-between text-slate-300 font-medium mb-1">
-          <span>Module Focus</span>
-          <span className="text-cyan-400 font-mono text-[11px]">RL in LLMs</span>
+          <span>Interactive Explorer</span>
+          <span className="text-cyan-400 font-mono text-[11px]">4 Core Domains</span>
         </div>
         <p className="text-[11px] leading-relaxed text-slate-500">
-          Visualizing mathematical objectives & policy optimization algorithms.
+          Visualizing LLM Basics, RL Alignment, PEFT, and Reasoning Algorithms.
         </p>
       </div>
     </div>
