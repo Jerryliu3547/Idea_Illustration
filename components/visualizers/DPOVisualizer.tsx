@@ -21,7 +21,8 @@ import {
   ArrowUp,
   Video,
   ExternalLink,
-  Scale
+  Scale,
+  FileText
 } from 'lucide-react';
 
 export const DPOVisualizer: React.FC = () => {
@@ -133,10 +134,18 @@ export const DPOVisualizer: React.FC = () => {
 
           <button
             onClick={() => document.getElementById('section-video')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-red-500/20 text-slate-200 hover:text-red-300 border border-slate-800 hover:border-red-500/40 transition-all flex items-center justify-start gap-2.5 text-left md:col-span-2 lg:col-span-1"
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-red-500/20 text-slate-200 hover:text-red-300 border border-slate-800 hover:border-red-500/40 transition-all flex items-center justify-start gap-2.5 text-left"
           >
             <Video className="h-4 w-4 text-red-400 shrink-0" />
             <span className="font-semibold">5. Video Walkthrough</span>
+          </button>
+
+          <button
+            onClick={() => document.getElementById('section-paper')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-indigo-500/20 text-slate-200 hover:text-indigo-300 border border-slate-800 hover:border-indigo-500/40 transition-all flex items-center justify-start gap-2.5 text-left"
+          >
+            <FileText className="h-4 w-4 text-indigo-400 shrink-0" />
+            <span className="font-semibold">6. DPO Paper</span>
           </button>
         </div>
       </div>
@@ -815,6 +824,49 @@ export const DPOVisualizer: React.FC = () => {
             allowFullScreen
             className="w-full h-full rounded-2xl border-0"
           />
+        </div>
+      </div>
+
+      {/* Original Research Paper Reference Section */}
+      <div id="section-paper" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-4 border-indigo-500/30 bg-gradient-to-br from-indigo-950/20 via-slate-900/80 to-slate-950 shadow-2xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div className="space-y-1">
+            <span className="text-xs font-mono font-bold text-indigo-400 uppercase tracking-wider block flex items-center gap-1.5">
+              <FileText className="h-4 w-4 text-indigo-400" /> ORIGINAL RESEARCH PAPER (NeurIPS 2023)
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
+              Direct Preference Optimization: Your Language Model is Secretly a Reward Model
+            </h2>
+            <p className="text-xs text-slate-300">
+              Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, Chelsea Finn — Stanford University
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 self-start md:self-auto shrink-0">
+            <a
+              href="https://arxiv.org/abs/2305.18290"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all flex items-center gap-1.5"
+            >
+              <ExternalLink className="h-4 w-4 text-indigo-400" />
+              <span>ArXiv Abstract</span>
+            </a>
+
+            <a
+              href="https://arxiv.org/pdf/2305.18290"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-xl text-xs font-mono font-bold bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 transition-all flex items-center gap-2"
+            >
+              <FileText className="h-4 w-4 text-indigo-400" />
+              <span>Open PDF (arXiv:2305.18290)</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="p-4 bg-slate-950/80 rounded-2xl border border-slate-800 text-xs text-slate-300 leading-relaxed italic">
+          &quot;We introduce Direct Preference Optimization (DPO), an algorithm for implicitly optimizing reference-constrained preference loss using a simple binary cross-entropy loss directly on policy parameters. DPO achieves performance on par or superior to traditional PPO-based RLHF without training an explicit reward model or sampling rollouts during training.&quot;
         </div>
       </div>
 
