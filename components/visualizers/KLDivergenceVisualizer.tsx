@@ -21,10 +21,16 @@ import {
   Dices,
   Calculator,
   ArrowRightLeft,
-  BookOpen
+  BookOpen,
+  ZoomIn,
+  Maximize2,
+  X
 } from 'lucide-react';
 
 export const KLDivergenceVisualizer: React.FC = () => {
+  // Modal Lightbox state for enlarged image preview
+  const [activeModalImage, setActiveModalImage] = useState<{ src: string; title: string } | null>(null);
+
   // Continuous LLM state
   const [beta, setBeta] = useState<number>(0.1);
   const [driftMean, setDriftMean] = useState<number>(1.2); // Shift in policy mean relative to ref mean (0)
@@ -56,13 +62,25 @@ export const KLDivergenceVisualizer: React.FC = () => {
     setRawQ(updated);
   };
 
-  // Real number step-by-step calculations for KL(P || Q) and KL(Q || P)
+  // Real number step-by-step calculations for Entropy H(P), Cross-Entropy H(P,Q), KL(P || Q) and KL(Q || P)
   const dieCalculations = useMemo(() => {
+    let entropyP_nats = 0;
+    let crossEntropyPQ_nats = 0;
     let klPQ_nats = 0;
     let klQP_nats = 0;
 
     const rows = P_die.map((p, i) => {
       const q = Q_die[i];
+      
+      const surpriseP = -Math.log(p || 1e-9);
+      const surpriseQ = -Math.log(q || 1e-9);
+
+      const entropyTerm = p * surpriseP;
+      entropyP_nats += entropyTerm;
+
+      const crossEntropyTerm = p * surpriseQ;
+      crossEntropyPQ_nats += crossEntropyTerm;
+
       const ratioPQ = p / (q || 1e-9);
       const lnRatioPQ = Math.log(ratioPQ);
       const termPQ = p * lnRatioPQ;
@@ -77,17 +95,27 @@ export const KLDivergenceVisualizer: React.FC = () => {
         face: i + 1,
         p: parseFloat(p.toFixed(4)),
         q: parseFloat(q.toFixed(4)),
+        surpriseP: parseFloat(surpriseP.toFixed(4)),
+        surpriseQ: parseFloat(surpriseQ.toFixed(4)),
+        entropyTerm: parseFloat(entropyTerm.toFixed(4)),
+        crossEntropyTerm: parseFloat(crossEntropyTerm.toFixed(4)),
         ratioPQ: parseFloat(ratioPQ.toFixed(4)),
         lnRatioPQ: parseFloat(lnRatioPQ.toFixed(4)),
         termPQ: parseFloat(termPQ.toFixed(4)),
       };
     });
 
+    const entropyP_bits = entropyP_nats / Math.LN2;
+    const crossEntropyPQ_bits = crossEntropyPQ_nats / Math.LN2;
     const klPQ_bits = klPQ_nats / Math.LN2;
     const klQP_bits = klQP_nats / Math.LN2;
 
     return {
       rows,
+      entropyP_nats: parseFloat(entropyP_nats.toFixed(4)),
+      entropyP_bits: parseFloat(entropyP_bits.toFixed(4)),
+      crossEntropyPQ_nats: parseFloat(crossEntropyPQ_nats.toFixed(4)),
+      crossEntropyPQ_bits: parseFloat(crossEntropyPQ_bits.toFixed(4)),
       klPQ_nats: parseFloat(klPQ_nats.toFixed(4)),
       klPQ_bits: parseFloat(klPQ_bits.toFixed(4)),
       klQP_nats: parseFloat(klQP_nats.toFixed(4)),
@@ -155,7 +183,7 @@ export const KLDivergenceVisualizer: React.FC = () => {
             <BookOpen className="h-5 w-5 text-cyan-400" /> Core Mathematical Formulations
           </h2>
           <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-            Definition & RLHF Reward
+            Definition & Information Theory
           </span>
         </div>
 
@@ -202,6 +230,226 @@ export const KLDivergenceVisualizer: React.FC = () => {
             <CheckCircle2 className="h-4 w-4 text-purple-400 shrink-0" />
             <span>Asymmetric: <MathFormula math="D_{\text{KL}}(P \parallel Q) \neq D_{\text{KL}}(Q \parallel P)" /></span>
           </div>
+        </div>
+      </div>
+
+      {/* INFORMATION THEORY TRINITY: ENTROPY, CROSS-ENTROPY & KL DIVERGENCE */}
+      <div className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-indigo-500/40 bg-gradient-to-br from-indigo-950/20 via-slate-900/70 to-blue-950/20 shadow-xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div>
+            <span className="text-xs font-mono font-bold text-indigo-400 uppercase tracking-wider block mb-1">
+              INFORMATION THEORY FOUNDATIONS
+            </span>
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+              Entropy, Cross-Entropy & KL Divergence Relationship
+            </h2>
+            <p className="text-xs text-slate-300 mt-1">
+              KL Divergence represents the excess surprise (or penalty) introduced by using model distribution <MathFormula math="q" /> instead of true distribution <MathFormula math="p" />.
+            </p>
+          </div>
+          <div className="bg-indigo-500/10 border border-indigo-500/30 px-3 py-1.5 rounded-xl font-mono text-xs text-indigo-300 font-bold self-start md:self-auto">
+            <MathFormula math="D_{\text{KL}}(p \parallel q) = H(p, q) - H(p)" />
+          </div>
+        </div>
+
+        {/* 3 Concept Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Card 1: Entropy H(p) */}
+          <div className="bg-slate-950/90 rounded-2xl p-5 border border-cyan-500/30 space-y-3 flex flex-col justify-between hover:border-cyan-500/60 transition-all">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">
+                  1. Entropy <MathFormula math="H(p)" />
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                  Reality Baseline
+                </span>
+              </div>
+              <div 
+                onClick={() => setActiveModalImage({ src: '/entropy_diagram.png', title: 'Entropy H(p) - Infographic' })}
+                className="group relative cursor-pointer overflow-hidden rounded-xl border border-cyan-500/30 my-2 bg-slate-900/60 shadow-lg"
+              >
+                <img 
+                  src="/entropy_diagram.png" 
+                  alt="Entropy Concept Diagram" 
+                  className="w-full h-44 object-cover group-hover:scale-125 transition-transform duration-500 ease-out" 
+                />
+                <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-1.5 text-cyan-300 font-mono text-xs font-bold backdrop-blur-[2px]">
+                  <ZoomIn className="h-4 w-4" /> Click to Expand
+                </div>
+              </div>
+              <div className="py-2 bg-slate-900/80 rounded-xl text-center border border-slate-800 my-2">
+                <MathFormula math="H(p) = -\sum_x p(x) \log p(x) = \mathbb{E}_{x \sim p}[-\log p(x)]" block />
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Measures the expected surprise (or intrinsic uncertainty) of the true distribution <MathFormula math="p" /> when events are drawn from <MathFormula math="p" />.
+              </p>
+            </div>
+            <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+              <span className="text-slate-400">Live <MathFormula math="H(P)" />:</span>
+              <span className="font-bold text-cyan-300">{dieCalculations.entropyP_nats.toFixed(4)} nats</span>
+            </div>
+          </div>
+
+          {/* Card 2: Cross-Entropy H(p, q) */}
+          <div className="bg-slate-950/90 rounded-2xl p-5 border border-purple-500/30 space-y-3 flex flex-col justify-between hover:border-purple-500/60 transition-all">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-mono font-bold text-purple-400 uppercase tracking-wider">
+                  2. Cross-Entropy <MathFormula math="H(p, q)" />
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                  Total Surprise
+                </span>
+              </div>
+              <div 
+                onClick={() => setActiveModalImage({ src: '/cross_entropy_diagram.png', title: 'Cross-Entropy H(p, q) - Infographic' })}
+                className="group relative cursor-pointer overflow-hidden rounded-xl border border-purple-500/30 my-2 bg-slate-900/60 shadow-lg"
+              >
+                <img 
+                  src="/cross_entropy_diagram.png" 
+                  alt="Cross-Entropy Concept Diagram" 
+                  className="w-full h-44 object-cover group-hover:scale-125 transition-transform duration-500 ease-out" 
+                />
+                <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-1.5 text-purple-300 font-mono text-xs font-bold backdrop-blur-[2px]">
+                  <ZoomIn className="h-4 w-4" /> Click to Expand
+                </div>
+              </div>
+              <div className="py-2 bg-slate-900/80 rounded-xl text-center border border-slate-800 my-2">
+                <MathFormula math="H(p, q) = -\sum_x p(x) \log q(x) = \mathbb{E}_{x \sim p}[-\log q(x)]" block />
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Measures the expected surprise of the model distribution <MathFormula math="q" /> when events actually occur according to true distribution <MathFormula math="p" />.
+              </p>
+            </div>
+            <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+              <span className="text-slate-400">Live <MathFormula math="H(P, Q)" />:</span>
+              <span className="font-bold text-purple-300">{dieCalculations.crossEntropyPQ_nats.toFixed(4)} nats</span>
+            </div>
+          </div>
+
+          {/* Card 3: KL Divergence D_KL(p || q) */}
+          <div className="bg-slate-950/90 rounded-2xl p-5 border border-emerald-500/30 space-y-3 flex flex-col justify-between hover:border-emerald-500/60 transition-all">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                  3. KL Divergence <MathFormula math="D_{\text{KL}}(p \parallel q)" />
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                  Excess Surprise
+                </span>
+              </div>
+              <div 
+                onClick={() => setActiveModalImage({ src: '/kl_divergence_diagram.png', title: 'KL Divergence D_KL(p || q) - Infographic' })}
+                className="group relative cursor-pointer overflow-hidden rounded-xl border border-emerald-500/30 my-2 bg-slate-900/60 shadow-lg"
+              >
+                <img 
+                  src="/kl_divergence_diagram.png" 
+                  alt="KL Divergence Concept Diagram" 
+                  className="w-full h-44 object-cover group-hover:scale-125 transition-transform duration-500 ease-out" 
+                />
+                <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-1.5 text-emerald-300 font-mono text-xs font-bold backdrop-blur-[2px]">
+                  <ZoomIn className="h-4 w-4" /> Click to Expand
+                </div>
+              </div>
+              <div className="py-2 bg-slate-900/80 rounded-xl text-center border border-slate-800 my-2">
+                <MathFormula math="D_{\text{KL}}(p \parallel q) = H(p, q) - H(p) = \sum_x p(x) \log \frac{p(x)}{q(x)}" block />
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Subtracting intrinsic entropy <MathFormula math="H(p)" /> from cross-entropy <MathFormula math="H(p, q)" /> isolates extra surprise caused solely by model mismatch.
+              </p>
+            </div>
+            <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+              <span className="text-slate-400">Live <MathFormula math="D_{\text{KL}}(P \parallel Q)" />:</span>
+              <span className="font-bold text-emerald-300">{dieCalculations.klPQ_nats.toFixed(4)} nats</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Live Mathematical Relationship & Visual Equation Bar */}
+        <div className="bg-slate-950/90 p-5 rounded-2xl border border-slate-800 space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <Calculator className="h-4 w-4 text-indigo-400" /> Interactive Identity Breakdown: <MathFormula math="H(P, Q) = H(P) + D_{\text{KL}}(P \parallel Q)" />
+            </h3>
+            <span className="text-xs font-mono text-slate-400">
+              Units: <span className="text-cyan-300 font-bold">{dieCalculations.crossEntropyPQ_nats.toFixed(4)} nats</span> ({dieCalculations.crossEntropyPQ_bits.toFixed(4)} bits)
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center font-mono text-xs">
+            <div className="p-3.5 rounded-xl bg-purple-950/30 border border-purple-500/30 space-y-1">
+              <span className="text-slate-400 text-[11px] block uppercase">Total Cross-Entropy <MathFormula math="H(P, Q)" /></span>
+              <span className="text-xl font-extrabold text-purple-300">{dieCalculations.crossEntropyPQ_nats.toFixed(4)}</span>
+              <span className="text-[10px] text-slate-500 block font-sans">Total Model Surprise</span>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30 space-y-1">
+              <span className="text-slate-400 text-[11px] block uppercase">Intrinsic Entropy <MathFormula math="H(P)" /></span>
+              <span className="text-xl font-extrabold text-cyan-300">{dieCalculations.entropyP_nats.toFixed(4)}</span>
+              <span className="text-[10px] text-slate-500 block font-sans">Baseline Reality Uncertainty</span>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/30 space-y-1">
+              <span className="text-slate-400 text-[11px] block uppercase">KL Divergence <MathFormula math="H(P, Q) - H(P)" /></span>
+              <span className="text-xl font-extrabold text-emerald-300">+{dieCalculations.klPQ_nats.toFixed(4)}</span>
+              <span className="text-[10px] text-slate-500 block font-sans">Excess Penalty / Mismatch</span>
+            </div>
+          </div>
+
+          {/* Graphical Stacked Proportion Bar */}
+          <div className="space-y-1.5 pt-2">
+            <div className="flex justify-between text-[11px] font-mono text-slate-400">
+              <span>Decomposition of Total Surprise <MathFormula math="H(P, Q)" /></span>
+              <span><MathFormula math="H(P)" /> ({((dieCalculations.entropyP_nats / (dieCalculations.crossEntropyPQ_nats || 1)) * 100).toFixed(1)}%) + <MathFormula math="D_{\text{KL}}" /> ({((dieCalculations.klPQ_nats / (dieCalculations.crossEntropyPQ_nats || 1)) * 100).toFixed(1)}%)</span>
+            </div>
+            <div className="w-full h-4 bg-slate-900 rounded-lg overflow-hidden flex border border-slate-800">
+              <div 
+                style={{ width: `${Math.min(100, Math.max(0, (dieCalculations.entropyP_nats / (dieCalculations.crossEntropyPQ_nats || 1)) * 100))}%` }} 
+                className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-300"
+                title={`Entropy H(P): ${dieCalculations.entropyP_nats}`}
+              />
+              <div 
+                style={{ width: `${Math.min(100, Math.max(0, (dieCalculations.klPQ_nats / (dieCalculations.crossEntropyPQ_nats || 1)) * 100))}%` }} 
+                className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300"
+                title={`KL Divergence: ${dieCalculations.klPQ_nats}`}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Concept Comparison Summary Table */}
+        <div className="overflow-x-auto rounded-2xl border border-slate-800">
+          <table className="w-full text-left text-xs font-mono">
+            <thead>
+              <tr className="border-b border-slate-800 text-slate-400 uppercase tracking-wider bg-slate-950/80">
+                <th className="py-3 px-4 font-bold text-slate-200">Concept</th>
+                <th className="py-3 px-4 font-bold text-indigo-400">Mathematical Form</th>
+                <th className="py-3 px-4 font-bold text-slate-200 font-sans">Intuition</th>
+                <th className="py-3 px-4 font-bold text-emerald-400 text-right">Current Value</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/60 bg-slate-950/40 font-sans text-slate-300">
+              <tr className="hover:bg-slate-800/30">
+                <td className="py-3 px-4 font-bold text-cyan-300 font-mono">Entropy <MathFormula math="H(p)" /></td>
+                <td className="py-3 px-4 font-mono text-cyan-200"><MathFormula math="\mathbb{E}_{p}[-\log p]" /></td>
+                <td className="py-3 px-4 text-slate-300">Intrinsic uncertainty / baseline surprise of reality</td>
+                <td className="py-3 px-4 font-mono font-bold text-cyan-300 text-right">{dieCalculations.entropyP_nats.toFixed(4)} nats</td>
+              </tr>
+              <tr className="hover:bg-slate-800/30">
+                <td className="py-3 px-4 font-bold text-purple-300 font-mono">Cross-Entropy <MathFormula math="H(p, q)" /></td>
+                <td className="py-3 px-4 font-mono text-purple-200"><MathFormula math="\mathbb{E}_{p}[-\log q]" /></td>
+                <td className="py-3 px-4 text-slate-300">Total surprise of using model <MathFormula math="q" /> on reality <MathFormula math="p" /></td>
+                <td className="py-3 px-4 font-mono font-bold text-purple-300 text-right">{dieCalculations.crossEntropyPQ_nats.toFixed(4)} nats</td>
+              </tr>
+              <tr className="hover:bg-slate-800/30">
+                <td className="py-3 px-4 font-bold text-emerald-300 font-mono">KL Divergence <MathFormula math="D_{\text{KL}}(p \parallel q)" /></td>
+                <td className="py-3 px-4 font-mono text-emerald-200"><MathFormula math="H(p, q) - H(p)" /></td>
+                <td className="py-3 px-4 text-slate-300">Excess surprise / divergence caused by model mismatch</td>
+                <td className="py-3 px-4 font-mono font-bold text-emerald-300 text-right">{dieCalculations.klPQ_nats.toFixed(4)} nats</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -327,9 +575,10 @@ export const KLDivergenceVisualizer: React.FC = () => {
                   <th className="py-2.5 px-3">Face <MathFormula math="i" /></th>
                   <th className="py-2.5 px-3 text-cyan-400">Fair <MathFormula math="P(i)" /></th>
                   <th className="py-2.5 px-3 text-purple-400">Loaded <MathFormula math="Q(i)" /></th>
-                  <th className="py-2.5 px-3">Ratio <MathFormula math="P(i)/Q(i)" /></th>
-                  <th className="py-2.5 px-3"><MathFormula math="\ln(P/Q)" /></th>
-                  <th className="py-2.5 px-3 text-emerald-400"><MathFormula math="P(i) \ln(P(i)/Q(i))" /></th>
+                  <th className="py-2.5 px-3 text-cyan-300">Surprise <MathFormula math="-\ln P" /></th>
+                  <th className="py-2.5 px-3 text-purple-300">Surprise <MathFormula math="-\ln Q" /></th>
+                  <th className="py-2.5 px-3 text-slate-300">Ratio <MathFormula math="P/Q" /></th>
+                  <th className="py-2.5 px-3 text-emerald-400"><MathFormula math="P(i) \ln(P/Q)" /></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60 text-slate-300">
@@ -338,8 +587,9 @@ export const KLDivergenceVisualizer: React.FC = () => {
                     <td className="py-2 px-3 font-bold text-white">Face {row.face}</td>
                     <td className="py-2 px-3 text-cyan-300">{row.p.toFixed(4)}</td>
                     <td className="py-2 px-3 text-purple-300">{row.q.toFixed(4)}</td>
+                    <td className="py-2 px-3 text-cyan-200">{row.surpriseP.toFixed(4)}</td>
+                    <td className="py-2 px-3 text-purple-200">{row.surpriseQ.toFixed(4)}</td>
                     <td className="py-2 px-3 text-slate-300">{row.ratioPQ.toFixed(4)}</td>
-                    <td className="py-2 px-3 text-slate-400">{row.lnRatioPQ.toFixed(4)}</td>
                     <td className="py-2 px-3 text-emerald-400 font-bold">
                       {row.termPQ >= 0 ? `+${row.termPQ.toFixed(4)}` : row.termPQ.toFixed(4)}
                     </td>
@@ -348,10 +598,10 @@ export const KLDivergenceVisualizer: React.FC = () => {
               </tbody>
               <tfoot>
                 <tr className="border-t-2 border-slate-700 bg-slate-950 font-bold text-sm">
-                  <td colSpan={5} className="py-3 px-3 text-white uppercase tracking-wider">
-                    Total KL Divergence <MathFormula math="D_{\text{KL}}(P \parallel Q) = \sum P(i) \ln \frac{P(i)}{Q(i)}" />
+                  <td colSpan={6} className="py-3 px-3 text-white uppercase tracking-wider">
+                    Total KL Divergence <MathFormula math="D_{\text{KL}}(P \parallel Q) = H(P, Q) - H(P)" />
                   </td>
-                  <td className="py-3 px-3 text-cyan-300 text-base font-mono">
+                  <td className="py-3 px-3 text-emerald-300 text-base font-mono">
                     {dieCalculations.klPQ_nats.toFixed(4)} nats <span className="text-xs text-slate-400 font-normal">({dieCalculations.klPQ_bits.toFixed(4)} bits)</span>
                   </td>
                 </tr>
@@ -560,6 +810,44 @@ export const KLDivergenceVisualizer: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Lightbox / Modal for Enlarged Image View */}
+      {activeModalImage && (
+        <div 
+          className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 animate-in fade-in duration-200"
+          onClick={() => setActiveModalImage(null)}
+        >
+          <div 
+            className="relative max-w-4xl w-full bg-slate-900 border border-slate-700 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                <Maximize2 className="h-5 w-5 text-cyan-400" /> {activeModalImage.title}
+              </h3>
+              <button 
+                onClick={() => setActiveModalImage(null)}
+                className="p-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 flex items-center justify-center max-h-[75vh]">
+              <img 
+                src={activeModalImage.src} 
+                alt={activeModalImage.title} 
+                className="w-full h-full object-contain max-h-[75vh]"
+              />
+            </div>
+
+            <div className="flex justify-between items-center text-xs font-mono text-slate-400 pt-1">
+              <span>Full resolution infographic details</span>
+              <span className="text-cyan-400">Click anywhere outside or X to close</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
