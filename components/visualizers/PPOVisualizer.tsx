@@ -39,7 +39,10 @@ import {
   Activity,
   Award,
   Check,
-  Bookmark
+  Bookmark,
+  Video,
+  Play,
+  ExternalLink
 } from 'lucide-react';
 
 export const PPOVisualizer: React.FC = () => {
@@ -186,6 +189,14 @@ export const PPOVisualizer: React.FC = () => {
           >
             <Sliders className="h-4 w-4 text-amber-400 shrink-0" />
             <span className="font-semibold">6. Clipped Objective Graph</span>
+          </button>
+
+          <button
+            onClick={() => document.getElementById('section-video-guide')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-red-500/20 text-slate-200 hover:text-red-300 border border-slate-800 hover:border-red-500/40 transition-all flex items-center justify-start gap-2.5 text-left sm:col-span-2"
+          >
+            <Video className="h-4 w-4 text-red-500 shrink-0" />
+            <span className="font-semibold">7. PPO & GAE In-Depth Video Walkthrough</span>
           </button>
         </div>
       </div>
@@ -1861,6 +1872,43 @@ export const PPOVisualizer: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* SECTION 7: RECOMMENDED VIDEO TUTORIAL / YOUTUBE DEEP DIVE */}
+      <div id="section-video-guide" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-red-500/40 bg-gradient-to-br from-red-950/20 via-slate-900/80 to-purple-950/20 shadow-2xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div>
+            <span className="text-xs font-mono font-bold text-red-400 uppercase tracking-wider block mb-1 flex items-center gap-1.5">
+              <Video className="h-4 w-4 text-red-500" /> VIDEO EXPLAINER & DEEP DIVE
+            </span>
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+              PPO & GAE In-Depth Video Walkthrough
+            </h2>
+            <p className="text-xs text-slate-300 mt-1">
+              Watch this comprehensive video guide explaining PPO (Proximal Policy Optimization) and GAE concepts in RLHF.
+            </p>
+          </div>
+          <a
+            href="https://www.youtube.com/watch?v=8jtAzxUwDj0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-xl text-xs font-mono font-bold bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/40 transition-all flex items-center gap-2 self-start md:self-auto shrink-0"
+          >
+            <ExternalLink className="h-4 w-4 text-red-400" />
+            <span>Open on YouTube</span>
+          </a>
+        </div>
+
+        {/* Embedded YouTube Video Player */}
+        <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-red-500/30 bg-slate-950 shadow-2xl">
+          <iframe
+            src="https://www.youtube.com/embed/8jtAzxUwDj0"
+            title="PPO and GAE Explained Video Tutorial"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="w-full h-full rounded-2xl border-0"
+          />
         </div>
       </div>
 
