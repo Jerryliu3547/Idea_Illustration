@@ -12,7 +12,9 @@ import {
   Sparkles,
   Zap,
   Layers,
-  ShieldCheck
+  ShieldCheck,
+  Bookmark,
+  ArrowUp
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -57,8 +59,34 @@ export const RLHFPipelineVisualizer: React.FC = () => {
         </p>
       </div>
 
+      {/* QUICK SECTION BOOKMARK NAVIGATION BAR */}
+      <div className="sticky top-2 z-30 bg-slate-950/95 backdrop-blur-md border border-amber-500/40 rounded-2xl p-4 shadow-2xl space-y-2.5">
+        <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400">
+          <Bookmark className="h-4 w-4 text-amber-400" />
+          <span>Quick Section Bookmarks:</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+          <button
+            onClick={() => document.getElementById('section-stages')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-amber-500/20 text-slate-200 hover:text-amber-300 border border-slate-800 hover:border-amber-500/40 transition-all flex items-center justify-start gap-2.5 text-left"
+          >
+            <Layers className="h-4 w-4 text-amber-400 shrink-0" />
+            <span className="font-semibold">1. RLHF 3-Stage Pipeline</span>
+          </button>
+
+          <button
+            onClick={() => document.getElementById('section-simulation')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2.5 rounded-xl bg-slate-900/90 hover:bg-indigo-500/20 text-slate-200 hover:text-indigo-300 border border-slate-800 hover:border-indigo-500/40 transition-all flex items-center justify-start gap-2.5 text-left"
+          >
+            <Zap className="h-4 w-4 text-indigo-400 shrink-0" />
+            <span className="font-semibold">2. Live RL Step Simulator</span>
+          </button>
+        </div>
+      </div>
+
       {/* Stage Selector Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div id="section-stages" className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Stage 1 */}
         <button
           onClick={() => setActiveStage(1)}
@@ -262,7 +290,7 @@ export const RLHFPipelineVisualizer: React.FC = () => {
               </div>
 
               {/* Interactive Pipeline Simulator */}
-              <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 space-y-4">
+              <div id="section-simulation" className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <h4 className="text-sm font-bold text-slate-200 flex items-center gap-2">
                     <Zap className="h-4 w-4 text-indigo-400" /> Live Interactive PPO RL Iteration Step
@@ -322,6 +350,20 @@ export const RLHFPipelineVisualizer: React.FC = () => {
             RLHF transforms raw next-token predictors into helpful, aligned assistants by replacing hardcoded rule sets with human preference models.
           </p>
         </div>
+      </div>
+
+      {/* Footer Back to Top Button Bar */}
+      <div className="flex justify-center pt-2">
+        <button
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.querySelector('main')?.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-amber-500/20 text-slate-300 hover:text-amber-300 border border-slate-800 hover:border-amber-500/40 font-mono text-xs font-bold transition-all flex items-center gap-2 shadow-lg"
+        >
+          <ArrowUp className="h-4 w-4 text-amber-400" />
+          <span>Back to Top</span>
+        </button>
       </div>
     </div>
   );
