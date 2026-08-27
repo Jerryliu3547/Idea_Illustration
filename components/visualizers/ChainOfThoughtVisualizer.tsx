@@ -445,47 +445,50 @@ export const ChainOfThoughtVisualizer: React.FC = () => {
               <Video className="h-4 w-4 text-rose-400" /> AUTHOR TALK & LECTURE
             </span>
             <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-              Jason Wei — Chain-of-Thought Prompting in Large Language Models
+              Jason Wei — Emergence & Chain-of-Thought Reasoning in LLMs
             </h2>
             <p className="text-xs text-slate-300 mt-1">
-              Full author talk playing from the beginning (0:00) discussing Chain-of-Thought prompting &amp; emergent scaling laws in LLMs.
+              Jason Wei presents Chain-of-Thought prompting, scaling laws, and emergent reasoning abilities in Large Language Models.
             </p>
           </div>
 
-          <a
-            href="https://www.youtube.com/watch?v=ebnX5Ur1hBk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-2 rounded-xl text-xs font-mono font-bold bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 transition-all flex items-center gap-2 shrink-0"
-          >
-            <ExternalLink className="h-4 w-4 text-rose-400" />
-            <span>Watch on YouTube</span>
-          </a>
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <a
+              href="https://www.youtube.com/watch?v=kYJv8y-9h_4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 transition-all flex items-center gap-1.5"
+            >
+              <ExternalLink className="h-3.5 w-3.5 text-rose-400" />
+              <span>Watch Talk #1</span>
+            </a>
+            <a
+              href="https://www.youtube.com/watch?v=ebnX5Ur1hBk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all flex items-center gap-1.5"
+            >
+              <ExternalLink className="h-3.5 w-3.5 text-slate-400" />
+              <span>Watch Talk #2</span>
+            </a>
+          </div>
         </div>
 
         {/* In-Page Embedded Video Player Container */}
         <div className="relative overflow-hidden rounded-2xl border border-rose-500/40 bg-slate-950 aspect-video shadow-2xl">
           <iframe
             className="w-full h-full"
-            src="https://www.youtube-nocookie.com/embed/ebnX5Ur1hBk?autoplay=0&rel=0&modestbranding=1"
-            title="Jason Wei - Chain-of-Thought Prompting Author Lecture"
+            src="https://www.youtube-nocookie.com/embed/kYJv8y-9h_4?autoplay=0&rel=0&modestbranding=1"
+            title="Jason Wei - Emergence and Reasoning in Large Language Models"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
           />
         </div>
 
-        {/* Fallback Direct Link Bar */}
+        {/* Note Bar */}
         <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-slate-400">
-          <span>Having trouble playing in-browser? Watch directly on YouTube:</span>
-          <a
-            href="https://www.youtube.com/watch?v=ebnX5Ur1hBk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-rose-400 hover:text-rose-300 font-bold underline flex items-center gap-1 shrink-0"
-          >
-            <ExternalLink className="h-3.5 w-3.5" /> Open https://www.youtube.com/watch?v=ebnX5Ur1hBk
-          </a>
+          <span>Note: If YouTube restricts playback for specific video IDs on third-party sites, use the direct buttons above.</span>
         </div>
       </div>
 
