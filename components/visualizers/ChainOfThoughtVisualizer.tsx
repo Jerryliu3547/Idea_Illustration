@@ -463,38 +463,30 @@ export const ChainOfThoughtVisualizer: React.FC = () => {
           </a>
         </div>
 
-        {/* YouTube Video Preview Card */}
-        <a
-          href="https://www.youtube.com/watch?v=ebnX5Ur1hBk"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative overflow-hidden rounded-2xl border border-rose-500/40 bg-slate-950 aspect-video shadow-2xl flex items-center justify-center cursor-pointer block"
-        >
-          {/* Thumbnail Image */}
-          <img
-            src="https://img.youtube.com/vi/ebnX5Ur1hBk/hqdefault.jpg"
-            alt="Jason Wei Chain-of-Thought Lecture Thumbnail"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+        {/* In-Page Embedded Video Player Container */}
+        <div className="relative overflow-hidden rounded-2xl border border-rose-500/40 bg-slate-950 aspect-video shadow-2xl">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube-nocookie.com/embed/ebnX5Ur1hBk?autoplay=0&rel=0&modestbranding=1"
+            title="Jason Wei - Chain-of-Thought Prompting Author Lecture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
           />
+        </div>
 
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
-
-          {/* Play Button Overlay */}
-          <div className="absolute flex flex-col items-center gap-3 z-10">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-rose-600/90 text-white shadow-xl shadow-rose-600/40 group-hover:scale-110 group-hover:bg-rose-500 transition-all">
-              <Play className="h-8 w-8 fill-white ml-1" />
-            </div>
-            <span className="font-mono text-xs font-bold text-white bg-slate-900/90 px-3 py-1.5 rounded-full border border-slate-700 shadow-md flex items-center gap-1.5">
-              <ExternalLink className="h-3.5 w-3.5 text-rose-400" /> Watch Full Lecture on YouTube
-            </span>
-          </div>
-
-          <div className="absolute bottom-3 left-4 right-4 flex justify-between items-center text-[11px] font-mono text-slate-300 z-10">
-            <span>Jason Wei — Chain-of-Thought Prompting</span>
-            <span className="text-rose-400 font-bold">Watch on YouTube →</span>
-          </div>
-        </a>
+        {/* Fallback Direct Link Bar */}
+        <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-slate-400">
+          <span>Having trouble playing in-browser? Watch directly on YouTube:</span>
+          <a
+            href="https://www.youtube.com/watch?v=ebnX5Ur1hBk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-rose-400 hover:text-rose-300 font-bold underline flex items-center gap-1 shrink-0"
+          >
+            <ExternalLink className="h-3.5 w-3.5" /> Open https://www.youtube.com/watch?v=ebnX5Ur1hBk
+          </a>
+        </div>
       </div>
 
       {/* SECTION 5: Original Research Paper Reference */}
