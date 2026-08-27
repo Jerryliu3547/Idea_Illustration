@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { getAssetPath } from '@/lib/asset';
 import { 
   Brain, 
   Sparkles, 
@@ -289,7 +290,7 @@ export const ChainOfThoughtVisualizer: React.FC = () => {
 
             <div className="relative rounded-xl overflow-hidden bg-white/95 p-3 border border-slate-700 shadow-inner flex justify-center">
               <img 
-                src="/images/cot_scaling.png" 
+                src={getAssetPath('/images/cot_scaling.png')} 
                 alt="Figure 4: Chain-of-thought prompting enables large language models to solve challenging math problems (Wei et al. 2022)"
                 className="max-h-[420px] w-auto object-contain rounded"
               />
@@ -439,56 +440,42 @@ export const ChainOfThoughtVisualizer: React.FC = () => {
 
       {/* SECTION 4: Author Video Lecture */}
       <div id="section-video" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-rose-500/40 bg-gradient-to-br from-rose-950/20 via-slate-900/80 to-slate-950 shadow-2xl">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-          <div>
-            <span className="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider block mb-1 flex items-center gap-1.5">
-              <Video className="h-4 w-4 text-rose-400" /> AUTHOR TALK & LECTURE
-            </span>
-            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-              Jason Wei — Emergence & Chain-of-Thought Reasoning in LLMs
-            </h2>
-            <p className="text-xs text-slate-300 mt-1">
-              Jason Wei presents Chain-of-Thought prompting, scaling laws, and emergent reasoning abilities in Large Language Models.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2 shrink-0">
-            <a
-              href="https://www.youtube.com/watch?v=kYJv8y-9h_4"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 transition-all flex items-center gap-1.5"
-            >
-              <ExternalLink className="h-3.5 w-3.5 text-rose-400" />
-              <span>Watch Talk #1</span>
-            </a>
-            <a
-              href="https://www.youtube.com/watch?v=ebnX5Ur1hBk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all flex items-center gap-1.5"
-            >
-              <ExternalLink className="h-3.5 w-3.5 text-slate-400" />
-              <span>Watch Talk #2</span>
-            </a>
-          </div>
+        <div className="border-b border-slate-800 pb-4">
+          <span className="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider block mb-1 flex items-center gap-1.5">
+            <Video className="h-4 w-4 text-rose-400" /> AUTHOR TALK & LECTURE
+          </span>
+          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+            Large Language Model Reasoning — Denny Zhou of Google DeepMind
+          </h2>
+          <p className="text-xs text-slate-300 mt-1">
+            Talk on Chain-of-Thought prompting, emergent scaling laws, and deliberate reasoning algorithms in LLMs.
+          </p>
         </div>
 
-        {/* In-Page Embedded Video Player Container */}
+        {/* Embedded YouTube Player */}
         <div className="relative overflow-hidden rounded-2xl border border-rose-500/40 bg-slate-950 aspect-video shadow-2xl">
           <iframe
             className="w-full h-full"
-            src="https://www.youtube-nocookie.com/embed/kYJv8y-9h_4?autoplay=0&rel=0&modestbranding=1"
-            title="Jason Wei - Emergence and Reasoning in Large Language Models"
+            src="https://www.youtube.com/embed/ebnX5Ur1hBk"
+            title="Large Language Model Reasoning - Denny Zhou of Google DeepMind"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
           />
         </div>
 
-        {/* Note Bar */}
-        <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-slate-400">
-          <span>Note: If YouTube restricts playback for specific video IDs on third-party sites, use the direct buttons above.</span>
+        {/* Backup Direct Link Below Video */}
+        <div className="p-3.5 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-slate-300">
+          <span className="flex items-center gap-1.5 text-slate-400">
+            <span>Backup Direct Link:</span>
+          </span>
+          <a
+            href="https://www.youtube.com/watch?v=ebnX5Ur1hBk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-rose-400 hover:text-rose-300 font-bold underline flex items-center gap-1.5 shrink-0"
+          >
+            <ExternalLink className="h-3.5 w-3.5" /> https://www.youtube.com/watch?v=ebnX5Ur1hBk
+          </a>
         </div>
       </div>
 
