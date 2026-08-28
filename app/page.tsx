@@ -14,7 +14,8 @@ import {
   BookOpen,
   Cpu,
   BarChart3,
-  ListTree
+  ListTree,
+  GraduationCap
 } from 'lucide-react';
 
 interface ConceptItem {
@@ -63,6 +64,17 @@ const categories: ConceptCategory[] = [
         badge: 'Sampling',
         formula: 'P(y_i) = \\frac{e^{z_i / T}}{\\sum_j e^{z_j / T}}',
         desc: 'Converts unnormalized raw output logits into probabilities; temperature T controls greediness vs randomness.',
+      },
+      {
+        id: 'knowledge-distillation',
+        title: 'Knowledge Distillation',
+        subtitle: 'Teacher-Student Capacity Transfer',
+        href: '/llm-basics/knowledge-distillation',
+        icon: GraduationCap,
+        color: 'from-rose-500/20 to-purple-500/10 border-rose-500/30 text-rose-400',
+        badge: 'Teacher-Student',
+        formula: '\\mathcal{L}_{\\text{KD}} = (1 - \\alpha) \\mathcal{L}_{\\text{CE}} + \\alpha T^2 D_{\\text{KL}}(P_T^T \\parallel P_S^T)',
+        desc: 'Transfers dark knowledge & reasoning trajectories from a high-capacity Teacher (e.g. 70B) to a compact Student (e.g. 8B).',
       },
     ],
   },
@@ -190,7 +202,7 @@ export default function DashboardPage() {
             Comprehensive AI & LLM Concept Explorer
           </h1>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            Explore 10 interactive visualizers across 4 core domains: LLM Basics, Reinforcement Learning Alignment, Parameter Efficient Fine-Tuning (PEFT), and Reasoning algorithms.
+            Explore 11 interactive visualizers across 4 core domains: LLM Basics, Reinforcement Learning Alignment, Parameter Efficient Fine-Tuning (PEFT), and Reasoning algorithms.
           </p>
         </div>
       </div>

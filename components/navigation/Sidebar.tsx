@@ -21,7 +21,8 @@ import {
   Cpu,
   BarChart3,
   Layers,
-  ListTree
+  ListTree,
+  GraduationCap
 } from 'lucide-react';
 
 interface NavTreeSubItem {
@@ -60,6 +61,13 @@ const treeNavigation: NavTreeCategory[] = [
         icon: BarChart3,
         badge: 'Sampling',
         color: 'text-amber-400',
+      },
+      {
+        name: 'Knowledge Distillation',
+        href: '/llm-basics/knowledge-distillation',
+        icon: GraduationCap,
+        badge: 'Teacher-Student',
+        color: 'text-rose-400',
       },
     ],
   },
