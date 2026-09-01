@@ -103,7 +103,7 @@ export const ReActVisualizer: React.FC = () => {
           <span>Quick Section Bookmarks:</span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs font-mono">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-xs font-mono">
           <button
             onClick={() => document.getElementById('section-paper-fig')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-amber-500/20 text-slate-200 hover:text-amber-300 border border-slate-800 hover:border-amber-500/40 transition-all flex items-center justify-start gap-2 text-left"
@@ -117,7 +117,7 @@ export const ReActVisualizer: React.FC = () => {
             className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-cyan-500/20 text-slate-200 hover:text-cyan-300 border border-slate-800 hover:border-cyan-500/40 transition-all flex items-center justify-start gap-2 text-left"
           >
             <Workflow className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
-            <span className="font-semibold truncate">2. 4-Way Comparison</span>
+            <span className="font-semibold truncate">2. Comparison</span>
           </button>
 
           <button
@@ -125,7 +125,7 @@ export const ReActVisualizer: React.FC = () => {
             className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-purple-500/20 text-slate-200 hover:text-purple-300 border border-slate-800 hover:border-purple-500/40 transition-all flex items-center justify-start gap-2 text-left"
           >
             <Bot className="h-3.5 w-3.5 text-purple-400 shrink-0" />
-            <span className="font-semibold truncate">3. Agent Trace Loop</span>
+            <span className="font-semibold truncate">3. Agent Loop</span>
           </button>
 
           <button
@@ -133,15 +133,23 @@ export const ReActVisualizer: React.FC = () => {
             className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-emerald-500/20 text-slate-200 hover:text-emerald-300 border border-slate-800 hover:border-emerald-500/40 transition-all flex items-center justify-start gap-2 text-left"
           >
             <Globe className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-            <span className="font-semibold truncate">4. Math Formulation</span>
+            <span className="font-semibold truncate">4. Formulation</span>
+          </button>
+
+          <button
+            onClick={() => document.getElementById('section-results')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-amber-500/20 text-slate-200 hover:text-amber-300 border border-slate-800 hover:border-amber-500/40 transition-all flex items-center justify-start gap-2 text-left"
+          >
+            <TrendingUp className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+            <span className="font-semibold truncate">5. Empirical Results</span>
           </button>
 
           <button
             onClick={() => document.getElementById('section-paper')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-rose-500/20 text-slate-200 hover:text-rose-300 border border-slate-800 hover:border-rose-500/40 transition-all flex items-center justify-start gap-2 text-left col-span-2 sm:col-span-1"
+            className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-rose-500/20 text-slate-200 hover:text-rose-300 border border-slate-800 hover:border-rose-500/40 transition-all flex items-center justify-start gap-2 text-left"
           >
             <FileText className="h-3.5 w-3.5 text-rose-400 shrink-0" />
-            <span className="font-semibold truncate">5. Paper Reference</span>
+            <span className="font-semibold truncate">6. Paper Reference</span>
           </button>
         </div>
       </div>
@@ -517,7 +525,162 @@ export const ReActVisualizer: React.FC = () => {
         </div>
       </div>
 
-      {/* SECTION 5: Original Research Paper Reference */}
+      {/* SECTION 5: ReAct Results & Key Empirical Observations */}
+      <div id="section-results" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border-amber-500/40 bg-gradient-to-br from-amber-950/20 via-slate-900/80 to-slate-950 shadow-2xl">
+        <div className="border-b border-slate-800 pb-4">
+          <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider block mb-1 flex items-center gap-1.5">
+            <TrendingUp className="h-4 w-4 text-amber-400" /> EMPIRICAL ANALYSIS & AGENTIC DESIGN PATTERNS
+          </span>
+          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+            ReAct Results & Key Empirical Observations
+          </h2>
+          <p className="text-xs text-slate-300 mt-1">
+            Deep-dive empirical findings from Yao et al. (ICLR 2023) detailing trade-offs, retrieval bottlenecks, orchestration strategies, and fine-tuning dynamics.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+          {/* Card 1: The Hallucination vs. Flexibility Trade-off */}
+          <div className="bg-slate-950 p-6 rounded-2xl border border-rose-500/40 space-y-4 shadow-xl flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <span className="font-mono font-bold text-rose-300 text-sm flex items-center gap-2">
+                  <Layers className="h-4 w-4 text-rose-400" /> 1. Hallucination vs. Flexibility Trade-off
+                </span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                  CoT vs ReAct Failure Modes
+                </span>
+              </div>
+
+              <div className="space-y-2 text-slate-300 leading-relaxed font-sans">
+                <div className="p-3 bg-purple-950/30 rounded-xl border border-purple-500/30 space-y-1">
+                  <strong className="text-purple-300 font-mono text-xs block">CoT Weakness: Internal Hallucination (56% Error Rate)</strong>
+                  <p className="text-[11px] text-slate-300">
+                    <span className="text-rose-400 font-bold">56% of CoT’s failures</span> stem from making things up. Because CoT relies entirely on frozen parametric weights, it suffers a high rate of false positive factual hallucinations.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-amber-950/30 rounded-xl border border-amber-500/30 space-y-1">
+                  <strong className="text-amber-300 font-mono text-xs block">ReAct Weakness: Rigidity & Infinite Loops</strong>
+                  <p className="text-[11px] text-slate-300">
+                    ReAct is grounded by fetching external facts, but the strict <code className="text-amber-300 font-mono">Thought ➔ Act ➔ Obs</code> loop reduces flexibility. Models often get stuck repeating the exact same thought and action endlessly without making progress.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-3.5 bg-slate-900 rounded-xl border border-slate-800 text-[11px] text-slate-200 space-y-1 mt-2">
+              <strong className="block font-mono text-amber-400 uppercase tracking-wider text-[10px]">Architectural Takeaway:</strong>
+              <p className="leading-relaxed text-slate-300">
+                CoT requires <strong>hallucination detection</strong> to catch semantic drift, whereas ReAct requires <strong>cyclical edge detection</strong> in the state graph to break infinite agent loops.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 2: The Retrieval Bottleneck */}
+          <div className="bg-slate-950 p-6 rounded-2xl border border-cyan-500/40 space-y-4 shadow-xl flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <span className="font-mono font-bold text-cyan-300 text-sm flex items-center gap-2">
+                  <Search className="h-4 w-4 text-cyan-400" /> 2. The Retrieval Bottleneck
+                </span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                  23% Search Failure Rate
+                </span>
+              </div>
+
+              <div className="space-y-2 text-slate-300 leading-relaxed font-sans">
+                <p className="text-xs text-slate-300">
+                  ReAct is deeply sensitive to the quality of the information it fetches.
+                </p>
+
+                <div className="p-3 bg-cyan-950/30 rounded-xl border border-cyan-500/30 space-y-1">
+                  <strong className="text-cyan-300 font-mono text-xs block">Uninformative Context Derailment:</strong>
+                  <p className="text-[11px] text-slate-300">
+                    <span className="text-cyan-400 font-bold">23% of ReAct errors</span> occur simply because the search step returned uninformative garbage context. When noisy observation context is injected into the prompt, the model’s reasoning chain gets derailed and rarely recovers.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-3.5 bg-slate-900 rounded-xl border border-slate-800 text-[11px] text-slate-200 space-y-1 mt-2">
+              <strong className="block font-mono text-cyan-400 uppercase tracking-wider text-[10px]">Architectural Takeaway:</strong>
+              <p className="leading-relaxed text-slate-300">
+                An agent is only as good as its retrieval layer. If the underlying vector search or tool API fails to surface relevant context, the entire reasoning trajectory collapses.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 3: "Best of Both Worlds" Orchestration */}
+          <div className="bg-slate-950 p-6 rounded-2xl border border-purple-500/40 space-y-4 shadow-xl flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <span className="font-mono font-bold text-purple-300 text-sm flex items-center gap-2">
+                  <Zap className="h-4 w-4 text-purple-400" /> 3. &quot;Best of Both Worlds&quot; Orchestration
+                </span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                  CoT-SC + ReAct
+                </span>
+              </div>
+
+              <div className="space-y-2 text-slate-300 leading-relaxed font-sans">
+                <p className="text-xs text-slate-300">
+                  Neither method is perfect on its own: ReAct wins on fact-heavy tasks (FEVER), while CoT slightly edges it out on internal multi-hop logic (HotpotQA).
+                </p>
+
+                <div className="p-3 bg-purple-950/30 rounded-xl border border-purple-500/30 space-y-1">
+                  <strong className="text-purple-300 font-mono text-xs block">Combining ReAct with CoT Self-Consistency (CoT-SC):</strong>
+                  <p className="text-[11px] text-slate-300">
+                    Switching between ReAct and CoT-SC reaches peak performance using only <span className="text-purple-300 font-bold">3 to 5 reasoning samples</span>, compared to needing <span className="text-rose-400 font-bold">21 samples</span> with CoT-SC alone!
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-3.5 bg-slate-900 rounded-xl border border-slate-800 text-[11px] text-slate-200 space-y-1 mt-2">
+              <strong className="block font-mono text-purple-400 uppercase tracking-wider text-[10px]">Architectural Takeaway:</strong>
+              <p className="leading-relaxed text-slate-300">
+                Dynamic orchestration—where a system leverages internal CoT logic but selectively calls ReAct tools when external grounding is needed—is the optimal agent architecture.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 4: Fine-Tuning a "Skill" vs. Memorizing "Facts" */}
+          <div className="bg-slate-950 p-6 rounded-2xl border border-emerald-500/40 space-y-4 shadow-xl flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <span className="font-mono font-bold text-emerald-300 text-sm flex items-center gap-2">
+                  <BarChart2 className="h-4 w-4 text-emerald-400" /> 4. Fine-Tuning a &quot;Skill&quot; vs. Memorizing &quot;Facts&quot;
+                </span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  Paper Figure 3 Scaling
+                </span>
+              </div>
+
+              <div className="space-y-2 text-slate-300 leading-relaxed font-sans">
+                <p className="text-xs text-slate-300">
+                  Yao et al. Figure 3 reveals a massive scaling advantage for ReAct when fine-tuned:
+                </p>
+
+                <div className="p-3 bg-emerald-950/30 rounded-xl border border-emerald-500/30 space-y-1 text-[11px]">
+                  <p>• Prompting an 8B model with ReAct fails (too complex to learn tool-use from a few context examples).</p>
+                  <p>• Fine-tuning an <span className="text-emerald-300 font-bold">8B model on 3,000 ReAct trajectories</span> outperforms a <span className="text-amber-300 font-bold">62B prompted model</span>!</p>
+                  <p>• A <span className="text-emerald-300 font-bold">62B fine-tuned ReAct model</span> outperforms a <span className="text-rose-400 font-bold">540B prompted PaLM model</span>!</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-3.5 bg-slate-900 rounded-xl border border-slate-800 text-[11px] text-slate-200 space-y-1 mt-2">
+              <strong className="block font-mono text-emerald-400 uppercase tracking-wider text-[10px]">Architectural Takeaway:</strong>
+              <p className="leading-relaxed text-slate-300">
+                Fine-tuning standard CoT forces models to memorise facts (which hallucinate). Fine-tuning ReAct teaches models a <strong>generalizable tool-use skill</strong>, enabling small models to outperform giant models.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* SECTION 6: Original Research Paper Reference */}
       <div id="section-paper" className="glass-panel rounded-3xl p-6 sm:p-8 space-y-4 border-rose-500/40 bg-gradient-to-br from-rose-950/20 via-slate-900/80 to-slate-950 shadow-2xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div className="space-y-1">
