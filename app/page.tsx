@@ -217,6 +217,24 @@ const categories: ConceptCategory[] = [
       },
     ],
   },
+  {
+    title: 'Philosophy of AI',
+    subtitle: 'Fundamental principles, scaling laws & foundational essays',
+    badge: 'AI Philosophy',
+    items: [
+      {
+        id: 'bitter-lesson',
+        title: 'The Bitter Lesson',
+        subtitle: 'General Computation vs Human Engineering',
+        href: '/philosophy-of-ai/bitter-lesson',
+        icon: BookOpen,
+        color: 'from-rose-500/20 to-red-500/10 border-rose-500/30 text-rose-300',
+        badge: 'Richard Sutton (2019)',
+        formula: '\\text{Performance}(C) \\propto \\text{General Search & Learning}(C)',
+        desc: 'General methods leveraging massive computation ultimately defeat human-engineered domain knowledge by a large margin in the long run.',
+      },
+    ],
+  },
 ];
 
 export default function DashboardPage() {

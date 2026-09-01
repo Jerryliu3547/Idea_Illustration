@@ -23,7 +23,8 @@ import {
   Layers,
   ListTree,
   Bot,
-  GraduationCap
+  GraduationCap,
+  BookOpen
 } from 'lucide-react';
 
 interface NavTreeSubItem {
@@ -174,6 +175,21 @@ const treeNavigation: NavTreeCategory[] = [
       },
     ],
   },
+  {
+    id: 'philosophy-of-ai',
+    category: 'Philosophy of AI',
+    icon: BookOpen,
+    color: 'text-rose-400',
+    items: [
+      {
+        name: 'The Bitter Lesson',
+        href: '/philosophy-of-ai/bitter-lesson',
+        icon: BookOpen,
+        badge: 'Richard Sutton',
+        color: 'text-rose-400',
+      },
+    ],
+  },
 ];
 
 export const Sidebar: React.FC = () => {
@@ -187,6 +203,7 @@ export const Sidebar: React.FC = () => {
     'peft': true,
     'reasoning': true,
     'llm-self-improvement': true,
+    'philosophy-of-ai': true,
   });
 
   // Auto expand category folder if user is currently visiting a route inside it
