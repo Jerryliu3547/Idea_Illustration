@@ -15,6 +15,7 @@ import {
   Cpu,
   BarChart3,
   ListTree,
+  Bot,
   GraduationCap
 } from 'lucide-react';
 
@@ -185,6 +186,17 @@ const categories: ConceptCategory[] = [
         formula: 'v(s) \\in [0, 1], \\quad s = (x, y_{1..i})',
         desc: 'Explores multiple reasoning branches simultaneously with LLM thought generation, state evaluation v(s), and BFS/DFS search.',
       },
+      {
+        id: 'react',
+        title: 'ReAct (Reasoning and Acting)',
+        subtitle: 'Synergizing Internal Thoughts with External Actions',
+        href: '/reasoning/react',
+        icon: Bot,
+        color: 'from-amber-500/20 to-orange-500/10 border-amber-500/30 text-amber-300',
+        badge: 'ICLR 2023',
+        formula: '\\text{Thought}_t \\rightarrow \\text{Action}_t \\rightarrow \\text{Observation}_t',
+        desc: 'Interleaves reasoning traces with external environment API actions (e.g. Wikipedia search) to eliminate hallucinations.',
+      },
     ],
   },
 ];
@@ -202,7 +214,7 @@ export default function DashboardPage() {
             Comprehensive AI & LLM Concept Explorer
           </h1>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            Explore 11 interactive visualizers across 4 core domains: LLM Basics, Reinforcement Learning Alignment, Parameter Efficient Fine-Tuning (PEFT), and Reasoning algorithms.
+            Explore 12 interactive visualizers across 4 core domains: LLM Basics, Reinforcement Learning Alignment, Parameter Efficient Fine-Tuning (PEFT), and Reasoning algorithms.
           </p>
         </div>
       </div>

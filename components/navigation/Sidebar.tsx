@@ -22,6 +22,7 @@ import {
   BarChart3,
   Layers,
   ListTree,
+  Bot,
   GraduationCap
 } from 'lucide-react';
 
@@ -148,6 +149,13 @@ const treeNavigation: NavTreeCategory[] = [
         icon: ListTree,
         badge: 'Tree Search',
         color: 'text-cyan-400',
+      },
+      {
+        name: 'ReAct (Reason + Act)',
+        href: '/reasoning/react',
+        icon: Bot,
+        badge: 'ICLR 2023',
+        color: 'text-amber-400',
       },
     ],
   },
