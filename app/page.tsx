@@ -199,6 +199,24 @@ const categories: ConceptCategory[] = [
       },
     ],
   },
+  {
+    title: 'LLM Self-Improvement',
+    subtitle: 'Self-play, bootstrapping & iterative self-reasoning refinement',
+    badge: 'Self-Improvement',
+    items: [
+      {
+        id: 'star',
+        title: 'STaR: Self-Taught Reasoner',
+        subtitle: 'Bootstrapping Reasoning With Reasoning',
+        href: '/llm-self-improvement/star',
+        icon: Sparkles,
+        color: 'from-amber-500/20 to-yellow-500/10 border-amber-500/30 text-amber-300',
+        badge: 'Bootstrapping',
+        formula: 'D_{n} \\cup D_{n}^{\\text{rat}} \\rightarrow \\text{Fine-tune } M',
+        desc: 'Iteratively bootstraps reasoning by fine-tuning on self-generated rationales that yield correct answers, augmented by rationalization hints for failed problems.',
+      },
+    ],
+  },
 ];
 
 export default function DashboardPage() {

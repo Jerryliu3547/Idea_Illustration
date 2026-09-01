@@ -159,6 +159,21 @@ const treeNavigation: NavTreeCategory[] = [
       },
     ],
   },
+  {
+    id: 'llm-self-improvement',
+    category: 'LLM Self-Improvement',
+    icon: GraduationCap,
+    color: 'text-amber-400',
+    items: [
+      {
+        name: 'STaR: Self-Taught Reasoner',
+        href: '/llm-self-improvement/star',
+        icon: Sparkles,
+        badge: 'Bootstrapping',
+        color: 'text-amber-400',
+      },
+    ],
+  },
 ];
 
 export const Sidebar: React.FC = () => {
@@ -171,6 +186,7 @@ export const Sidebar: React.FC = () => {
     'rl-in-llms': true,
     'peft': true,
     'reasoning': true,
+    'llm-self-improvement': true,
   });
 
   // Auto expand category folder if user is currently visiting a route inside it
