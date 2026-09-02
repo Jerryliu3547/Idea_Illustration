@@ -162,6 +162,24 @@ const categories: ConceptCategory[] = [
     ],
   },
   {
+    title: 'Training Optimization',
+    subtitle: 'Sparse routing, expert specialization & architectural scaling',
+    badge: 'Compute Efficiency',
+    items: [
+      {
+        id: 'moe',
+        title: 'Mixture of Experts (MoE)',
+        subtitle: 'Sparse Gating & Dynamic Expert Routing',
+        href: '/training-optimization/moe',
+        icon: Cpu,
+        color: 'from-orange-500/20 to-amber-500/10 border-orange-500/30 text-orange-400',
+        badge: 'Sparse Routing',
+        formula: 'y = \\sum_{i=1}^N G(x)_i E_i(x), \\quad G(x) = \\text{Softmax}(\\text{TopK}(H(x)))',
+        desc: 'Replaces dense feed-forward layers with dynamically gated expert sub-networks, scaling total parameters dramatically while keeping per-token compute FLOPs constant.',
+      },
+    ],
+  },
+  {
     title: 'Reasoning & Chain of Thoughts',
     subtitle: 'Decomposition & tree search inference capabilities',
     badge: 'Reasoning',

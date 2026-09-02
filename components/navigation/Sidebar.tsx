@@ -134,6 +134,21 @@ const treeNavigation: NavTreeCategory[] = [
     ],
   },
   {
+    id: 'training-optimization',
+    category: 'Training Optimization',
+    icon: Cpu,
+    color: 'text-orange-400',
+    items: [
+      {
+        name: 'Mixture of Experts (MoE)',
+        href: '/training-optimization/moe',
+        icon: Cpu,
+        badge: 'Sparse Routing',
+        color: 'text-orange-400',
+      },
+    ],
+  },
+  {
     id: 'reasoning',
     category: 'Reasoning & Chain of Thoughts',
     icon: ListTree,
@@ -225,6 +240,7 @@ export const Sidebar: React.FC = () => {
     'llm-basics': true,
     'rl-in-llms': true,
     'peft': true,
+    'training-optimization': true,
     'reasoning': true,
     'llm-self-improvement': true,
     'test-time-adaptation': true,
