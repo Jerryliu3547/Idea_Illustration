@@ -16,7 +16,9 @@ import {
   BarChart3,
   ListTree,
   Bot,
-  GraduationCap
+  GraduationCap,
+  Zap,
+  RefreshCw
 } from 'lucide-react';
 
 interface ConceptItem {
@@ -218,6 +220,35 @@ const categories: ConceptCategory[] = [
     ],
   },
   {
+    title: 'Test-Time Adaptation & Learning',
+    subtitle: 'Parameter-efficient gradient updates and context encoding at test time',
+    badge: 'TTA / TTT',
+    items: [
+      {
+        id: 'perk',
+        title: 'PERK: Parameter-Efficient Test-Time Learning',
+        subtitle: 'Long-Context Reasoning as Meta-Learned LoRA Encoding',
+        href: '/test-time-adaptation/perk',
+        icon: Zap,
+        color: 'from-cyan-500/20 to-blue-500/10 border-cyan-500/30 text-cyan-300',
+        badge: 'LoRA Memory',
+        formula: '\\theta_{\\text{inner}} = \\theta_0 - \\eta \\nabla_\\theta \\mathcal{L}_{\\text{enc}}(C; \\theta)',
+        desc: 'Encodes massive long contexts into lightweight LoRA adapters via inner-loop test-time gradient updates, eliminating KV-cache memory explosions.',
+      },
+      {
+        id: 'learning-paradigms',
+        title: 'Train-Time vs. Test-Time vs. Inference-Time',
+        subtitle: '3-Way Machine Learning Adaptation Taxonomy',
+        href: '/test-time-adaptation/learning-paradigms',
+        icon: RefreshCw,
+        color: 'from-purple-500/20 to-pink-500/10 border-purple-500/30 text-purple-300',
+        badge: 'Paradigms',
+        formula: '\\theta^*_{\\text{Train}} \\; \\text{vs.} \\; \\theta_{\\text{Test}}(x) \\; \\text{vs.} \\; P_\\theta(y \\mid x)',
+        desc: 'Differentiates static pre-training weight updates, dynamic test-time parameter adaptation (TTA/TTT), and zero-gradient in-context inference (ICL/CoT).',
+      },
+    ],
+  },
+  {
     title: 'Philosophy of AI',
     subtitle: 'Fundamental principles, scaling laws & foundational essays',
     badge: 'AI Philosophy',
@@ -250,7 +281,7 @@ export default function DashboardPage() {
             Comprehensive AI & LLM Concept Explorer
           </h1>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            Explore 12 interactive visualizers across 4 core domains: LLM Basics, Reinforcement Learning Alignment, Parameter Efficient Fine-Tuning (PEFT), and Reasoning algorithms.
+            Explore 14 interactive visualizers across 5 core domains: LLM Basics, RL Alignment, PEFT, Reasoning Algorithms, and Test-Time Adaptation.
           </p>
         </div>
       </div>

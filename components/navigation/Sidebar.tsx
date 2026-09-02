@@ -24,7 +24,9 @@ import {
   ListTree,
   Bot,
   GraduationCap,
-  BookOpen
+  BookOpen,
+  Zap,
+  RefreshCw
 } from 'lucide-react';
 
 interface NavTreeSubItem {
@@ -176,6 +178,28 @@ const treeNavigation: NavTreeCategory[] = [
     ],
   },
   {
+    id: 'test-time-adaptation',
+    category: 'Test-Time Adaptation',
+    icon: Zap,
+    color: 'text-cyan-400',
+    items: [
+      {
+        name: 'PERK: Test-Time Learning',
+        href: '/test-time-adaptation/perk',
+        icon: Sparkles,
+        badge: 'LoRA Memory',
+        color: 'text-cyan-400',
+      },
+      {
+        name: 'Learning Paradigms Comparison',
+        href: '/test-time-adaptation/learning-paradigms',
+        icon: RefreshCw,
+        badge: 'Train vs Test vs Inf',
+        color: 'text-purple-400',
+      },
+    ],
+  },
+  {
     id: 'philosophy-of-ai',
     category: 'Philosophy of AI',
     icon: BookOpen,
@@ -203,6 +227,7 @@ export const Sidebar: React.FC = () => {
     'peft': true,
     'reasoning': true,
     'llm-self-improvement': true,
+    'test-time-adaptation': true,
     'philosophy-of-ai': true,
   });
 
