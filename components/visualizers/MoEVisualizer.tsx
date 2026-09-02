@@ -21,7 +21,8 @@ import {
   GitBranch,
   Network,
   Share2,
-  TrendingUp
+  TrendingUp,
+  BarChart3
 } from 'lucide-react';
 
 interface ExpertDef {
@@ -605,6 +606,80 @@ export const MoEVisualizer: React.FC = () => {
                 <p>
                   3. <strong className="text-amber-300 font-bold">Pure Sparse Gating:</strong> Does not use a dedicated shared expert. Active experts must handle both general language syntax and specialized context simultaneously. Output: <MathFormula math="y = \sum_{i \in \{3, 6\}} G(x)_i E_i(x)" />.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* EMPIRICAL ROUTING ANALYSIS: DO EXPERTS SPECIALIZE IN SUBJECT DOMAINS? */}
+        <div className="pt-6 border-t border-slate-800/80 space-y-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider block flex items-center gap-1.5">
+                <BarChart3 className="h-4 w-4 text-amber-400" /> EMPIRICAL ROUTING ANALYSIS (MIXTRAL 8x7B)
+              </span>
+              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                Do Experts Actually Specialize in Specific Subject Domains?
+              </h3>
+              <p className="text-xs text-slate-300">
+                Analyzing empirical token assignment across The Pile dataset (ArXiv, Math, Github, PubMed, Wikipedia).
+              </p>
+            </div>
+
+            <a
+              href="https://arxiv.org/abs/2401.04088"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-orange-600/20 hover:bg-orange-600/30 text-orange-300 border border-orange-500/40 transition-all flex items-center gap-1.5 shrink-0 self-start md:self-auto"
+            >
+              <ExternalLink className="h-4 w-4 text-orange-400" />
+              <span>Jiang et al. (2024) Figure 7</span>
+            </a>
+          </div>
+
+          <div className="bg-slate-950 p-5 rounded-2xl border border-amber-500/40 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <span className="text-xs font-mono font-bold text-amber-300 flex items-center gap-2">
+                <FileText className="h-4 w-4 text-amber-400" /> Figure 7: Proportion of Tokens Assigned to Each Expert Across Domains (The Pile)
+              </span>
+              <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                Layers 0, 15, and 31
+              </span>
+            </div>
+
+            {/* Embedded Figure 7 Image */}
+            <div className="rounded-xl overflow-hidden bg-white p-3 border border-slate-700 shadow-inner flex justify-center">
+              <img
+                src={getAssetPath('/images/moe_mixtral_routing_analysis.png')}
+                alt="Figure 7 from Mixtral of Experts paper showing proportion of tokens assigned to each expert on different domains from The Pile dataset for layers 0, 15, and 31"
+                className="max-h-[420px] w-auto object-contain rounded"
+              />
+            </div>
+
+            {/* Empirical Insights & Takeaways */}
+            <div className="p-4 bg-slate-900/90 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-3 leading-relaxed font-sans">
+              <div className="font-mono font-bold text-amber-400 text-xs uppercase tracking-wider">
+                Counter-Intuitive Empirical Findings & Analysis:
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-[11px]">
+                <div className="p-3.5 bg-slate-950 rounded-xl border border-rose-500/30 space-y-1.5">
+                  <strong className="text-rose-400 font-bold block text-xs">1. The Myth of Subject Domain Specialization:</strong>
+                  <p className="text-slate-300 font-sans">
+                    Contrary to early intuition (e.g. &quot;Expert 1 is for Math, Expert 2 is for Coding&quot;), empirical routing analysis in Mixtral 8x7B reveals that <strong className="text-white">tokens from vastly different domains (Math, Code, Biology, Philosophy, Wikipedia) route to all experts with near-uniform proportions (~12.5% dashed baseline)</strong>!
+                  </p>
+                </div>
+
+                <div className="p-3.5 bg-slate-950 rounded-xl border border-emerald-500/30 space-y-1.5">
+                  <strong className="text-emerald-400 font-bold block text-xs">2. What Experts ACTUALLY Specialize In:</strong>
+                  <p className="text-slate-300 font-sans">
+                    Instead of subject matter topics, experts specialize in <strong className="text-emerald-300">low-level syntactic/grammatical primitives, token frequencies, punctuation, and positional roles</strong> (e.g. indentation, mathematical operators, connectives) regardless of whether the text is a medical paper or python code!
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-3 bg-amber-950/30 rounded-xl border border-amber-500/40 text-amber-200 text-xs font-mono">
+                <strong>Architectural Consequence:</strong> This discovery directly inspired DeepSeek-MoE to introduce <strong className="text-amber-300">Shared Expert Isolation</strong> (to handle universal syntax) and <strong className="text-amber-300">Fine-Grained Expert Segmentation</strong> (to force sharper specialization).
               </div>
             </div>
           </div>
