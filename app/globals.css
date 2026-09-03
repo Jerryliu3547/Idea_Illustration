@@ -89,10 +89,42 @@ input[type="range"] {
   accent-color: #6366f1;
 }
 
-/* KaTeX tweaks for math alignment */
+/* Global Box & Card Font Size Enhancements */
+.glass-panel {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.glass-panel p {
+  line-height: 1.65;
+}
+
+/* Font size upgrades for small text in cards & badges */
+.text-\[10px\] {
+  font-size: 0.75rem !important; /* Upgraded to 12px for better readability */
+}
+
+.text-\[11px\] {
+  font-size: 0.8125rem !important; /* Upgraded to 13px */
+}
+
+.text-xs {
+  font-size: 0.84rem !important; /* Upgraded from 12px to ~13.5px */
+}
+
+.text-sm {
+  font-size: 0.9375rem !important; /* Upgraded from 14px to ~15px */
+}
+
+/* KaTeX tweaks for math alignment & size */
 .katex-display {
   margin: 0.75em 0 !important;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.5em 0;
 }
+
+.katex {
+  font-size: 1.08em !important;
+}
+
