@@ -415,13 +415,31 @@ export const TreeOfThoughtsVisualizer: React.FC = () => {
           <div className="p-5 rounded-2xl bg-slate-950 border border-purple-500/40 space-y-3 shadow-xl">
             <div className="flex items-center justify-between border-b border-slate-800 pb-2">
               <span className="text-purple-400 font-bold block uppercase text-xs">2. Thought Generator <MathFormula math="G(p_\theta, s, k)" /></span>
-              <span className="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">Candidate Proposal</span>
+              <span className="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold">Temperature vs. Prompt Control</span>
             </div>
             <div className="space-y-2 text-slate-300 font-sans text-xs leading-relaxed">
-              <p>Generates <MathFormula math="k" /> candidate next thoughts for state <MathFormula math="s = [x, z_{1..t}]" /> using two strategies:</p>
-              <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-1.5 font-mono text-xs">
-                <p>• <strong>Sample i.i.d.:</strong> <MathFormula math="z^{(i)} \sim p_\theta(z_t \mid s)" /> (used when thought space is rich)</p>
-                <p>• <strong>Propose Sequentially:</strong> Generate all <MathFormula math="k" /> candidates in one prompt (used when thought space is constrained)</p>
+              <p>Generates <MathFormula math="k" /> candidate next thoughts for state <MathFormula math="s = [x, z_{1..t}]" /> tailored to the task search landscape:</p>
+              
+              <div className="p-3 bg-purple-950/30 rounded-xl border border-purple-500/40 space-y-2 font-mono text-xs">
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between text-purple-300 font-bold">
+                    <span>1. Sample i.i.d. (<MathFormula math="z^{(i)} \sim p_\theta" />)</span>
+                    <span className="text-[11px] bg-purple-500/20 text-purple-200 px-1.5 py-0.5 rounded border border-purple-500/30">Control: Temperature (T &gt; 0)</span>
+                  </div>
+                  <p className="text-slate-300 font-sans text-xs leading-relaxed">
+                    <strong>Used for Rich / Open-Ended Spaces (e.g. Creative Writing):</strong> Generates <MathFormula math="k" /> independent completions in parallel. Temperature <MathFormula math="T > 0" /> promotes diverse story/outline directions where the search space is infinite (<MathFormula math="\mathbb{R}^\infty" />).
+                  </p>
+                </div>
+
+                <div className="pt-2 border-t border-purple-500/30 space-y-1">
+                  <div className="flex items-center justify-between text-cyan-300 font-bold">
+                    <span>2. Propose Sequentially</span>
+                    <span className="text-[11px] bg-cyan-500/20 text-cyan-200 px-1.5 py-0.5 rounded border border-cyan-500/30">Control: In-Context Prompting</span>
+                  </div>
+                  <p className="text-slate-300 font-sans text-xs leading-relaxed">
+                    <strong>Used for Constrained Spaces (e.g. Game of 24, Crosswords):</strong> Requests all <MathFormula math="k" /> distinct candidates in one prompt. In-context attention prevents generating duplicate moves and avoids wasting search budget.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
