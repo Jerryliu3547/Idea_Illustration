@@ -26,7 +26,9 @@ import {
   GraduationCap,
   BookOpen,
   Zap,
-  RefreshCw
+  RefreshCw,
+  ShieldCheck,
+  Scale
 } from 'lucide-react';
 
 interface NavTreeSubItem {
@@ -215,6 +217,28 @@ const treeNavigation: NavTreeCategory[] = [
     ],
   },
   {
+    id: 'agentic-evaluation',
+    category: 'Agentic Evaluation',
+    icon: ShieldCheck,
+    color: 'text-emerald-400',
+    items: [
+      {
+        name: 'Code & LLM Judges',
+        href: '/agentic-evaluation',
+        icon: Scale,
+        badge: 'Code & Judges',
+        color: 'text-emerald-400',
+      },
+      {
+        name: 'Agent Applications & Trajectories',
+        href: '/agentic-evaluation/evaluating-applications',
+        icon: Workflow,
+        badge: 'Actions & Trajectory',
+        color: 'text-cyan-400',
+      },
+    ],
+  },
+  {
     id: 'philosophy-of-ai',
     category: 'Philosophy of AI',
     icon: BookOpen,
@@ -244,6 +268,7 @@ export const Sidebar: React.FC = () => {
     'reasoning': true,
     'llm-self-improvement': true,
     'test-time-adaptation': true,
+    'agentic-evaluation': true,
     'philosophy-of-ai': true,
   });
 
@@ -375,10 +400,10 @@ export const Sidebar: React.FC = () => {
       <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-3 text-xs text-slate-400 mt-6">
         <div className="flex items-center justify-between text-slate-300 font-medium mb-1">
           <span>Interactive Explorer</span>
-          <span className="text-cyan-400 font-mono text-[11px]">4 Core Domains</span>
+          <span className="text-cyan-400 font-mono text-[11px]">6 Core Domains</span>
         </div>
         <p className="text-[11px] leading-relaxed text-slate-500">
-          Visualizing LLM Basics, RL Alignment, PEFT, and Reasoning Algorithms.
+          Visualizing LLM Basics, RL Alignment, PEFT, Reasoning, Adaptation & Agentic Evaluation.
         </p>
       </div>
     </div>

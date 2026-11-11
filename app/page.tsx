@@ -18,7 +18,8 @@ import {
   Bot,
   GraduationCap,
   Zap,
-  RefreshCw
+  RefreshCw,
+  Scale
 } from 'lucide-react';
 
 interface ConceptItem {
@@ -267,6 +268,35 @@ const categories: ConceptCategory[] = [
     ],
   },
   {
+    title: 'Agentic Evaluation',
+    subtitle: 'Deterministic rule-based checks, normalization & custom rubric LLM judges',
+    badge: 'Agent Evaluation',
+    items: [
+      {
+        id: 'agentic-evaluation',
+        title: 'Code Evaluators & LLM Judges',
+        subtitle: 'Dual Deterministic & Semantic Evaluation Pillars',
+        href: '/agentic-evaluation',
+        icon: Scale,
+        color: 'from-emerald-500/20 to-cyan-500/10 border-emerald-500/30 text-emerald-400',
+        badge: 'Code & LLM Judges',
+        formula: '\\text{Eval}(x) = \\bigwedge_{i=1}^5 C_i(x), \\quad \\text{Rubric} = \\langle \\text{Role}, \\text{Crit}, \\text{In}, \\text{Ex}, \\text{Out} \\rangle',
+        desc: 'Combines 5 deterministic code evaluator checks (schema, length, negative rules, DB facts, trace prerequisites) with the 5-step custom LLM judge rubric formula and severity calibration.',
+      },
+      {
+        id: 'agent-application-evaluation',
+        title: 'Evaluating Agent Applications',
+        subtitle: 'Actions, Trajectories, Multi-Turn Sessions & Outcomes',
+        href: '/agentic-evaluation/evaluating-applications',
+        icon: Workflow,
+        color: 'from-cyan-500/20 to-purple-500/10 border-cyan-500/30 text-cyan-400',
+        badge: 'Actions & Trajectory',
+        formula: '\\text{Audit}(\\tau) = \\langle \\text{Step}_{\\text{req}}, \\text{Order}, \\text{Prop} \\rangle, \\quad \\text{Outcome} \\perp \\text{Process}',
+        desc: 'Evaluates agents across 4 levels: individual tool calls (right action & details), 3-step trajectory audits, multi-turn session memory retention (scripted vs simulated LLM users), and decoupling system outcomes from procedural integrity.',
+      },
+    ],
+  },
+  {
     title: 'Philosophy of AI',
     subtitle: 'Fundamental principles, scaling laws & foundational essays',
     badge: 'AI Philosophy',
@@ -299,7 +329,7 @@ export default function DashboardPage() {
             Comprehensive AI & LLM Concept Explorer
           </h1>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            Explore 14 interactive visualizers across 5 core domains: LLM Basics, RL Alignment, PEFT, Reasoning Algorithms, and Test-Time Adaptation.
+            Explore 19 interactive visualizers across 6 core domains: LLM Basics, RL Alignment, PEFT, Reasoning Algorithms, Adaptation, and Agentic Evaluation.
           </p>
         </div>
       </div>
