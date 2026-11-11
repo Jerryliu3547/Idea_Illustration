@@ -439,7 +439,14 @@ export const AgenticEvaluationVisualizer: React.FC = () => {
         >
           <Workflow className="h-4 w-4 text-cyan-400" />
           <span>Tab 2: Agent Applications &amp; Trajectories</span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono">
+        </Link>
+        <Link
+          href="/agentic-evaluation/improving-in-production"
+          className="px-4 py-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-900 border border-transparent transition-all flex items-center gap-2 shrink-0"
+        >
+          <Sparkles className="h-4 w-4 text-amber-400" />
+          <span>Tab 3: Improve Agentic Application in Production</span>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono">
             New
           </span>
         </Link>

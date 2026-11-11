@@ -19,7 +19,9 @@ import {
   GraduationCap,
   Zap,
   RefreshCw,
-  Scale
+  Scale,
+  FileText,
+  Search
 } from 'lucide-react';
 
 interface ConceptItem {
@@ -294,6 +296,68 @@ const categories: ConceptCategory[] = [
         formula: '\\text{Audit}(\\tau) = \\langle \\text{Step}_{\\text{req}}, \\text{Order}, \\text{Prop} \\rangle, \\quad \\text{Outcome} \\perp \\text{Process}',
         desc: 'Evaluates agents across 4 levels: individual tool calls (right action & details), 3-step trajectory audits, multi-turn session memory retention (scripted vs simulated LLM users), and decoupling system outcomes from procedural integrity.',
       },
+      {
+        id: 'improve-agentic-application-production',
+        title: 'Improve Agentic Applications in Production',
+        subtitle: 'Eval-Driven Development, Root-Cause Pyramid, 4 Pillars & Flywheel',
+        href: '/agentic-evaluation/improving-in-production',
+        icon: Sparkles,
+        color: 'from-amber-500/20 to-emerald-500/10 border-amber-500/30 text-amber-400',
+        badge: 'Production & Flywheel',
+        formula: '\\text{ROI} = \\frac{\\text{Val} \\times \\text{Sev}}{\\text{Effort}}, \\quad \\text{Trace} \\xrightarrow{\\text{Curate}} \\mathcal{D}_{\\text{Bench}} \\xrightarrow{\\text{Eval}} \\text{Release}',
+        desc: 'Operational framework for continuous agent improvement: capability vs regression evals, triage ROI matrix, 5-layer root-cause pyramid, the 4 production pillars, and the production-to-eval flywheel.',
+      },
+    ],
+  },
+  {
+    title: 'Context Engineering',
+    subtitle: 'Dynamic context construction, agentic search, token budgeting & long-term agentic memory',
+    badge: 'Context & Memory',
+    items: [
+      {
+        id: 'intro-context-eng',
+        title: 'Intro Context Eng',
+        subtitle: 'Foundations of Context Engineering for LLMs & Agents',
+        href: '/context-engineering',
+        icon: FileText,
+        color: 'from-indigo-500/20 to-cyan-500/10 border-indigo-500/30 text-indigo-400',
+        badge: 'Intro',
+        formula: '\\mathcal{C}^* = \\arg\\max_{\\mathcal{C} \\subseteq \\mathcal{U}} P_\\theta(y \\mid x, \\mathcal{C}), \\quad |\\mathcal{C}| \\le L_{\\max}',
+        desc: 'Principles of context optimization, attention allocation, signal-to-noise ratio, and prompt structuring for agentic reasoning.',
+      },
+      {
+        id: 'agentic-search',
+        title: 'Agentic Search',
+        subtitle: 'Dynamic Information Retrieval & External Tool Augmentation',
+        href: '/context-engineering/agentic-search',
+        icon: Search,
+        color: 'from-cyan-500/20 to-blue-500/10 border-cyan-500/30 text-cyan-400',
+        badge: 'Search',
+        formula: '\\mathcal{S}_t = \\text{Retrieve}(q_t, \\mathcal{K}), \\quad q_{t+1} = \\pi(a_t \\mid x, \\mathcal{S}_{1:t})',
+        desc: 'Autonomous multi-hop search, query reformulation, web retrieval, and filtering high-density evidence into the context window.',
+      },
+      {
+        id: 'context-management',
+        title: 'Context Management',
+        subtitle: 'Token Budgeting, Compression, Pruning & Dynamic Assembly',
+        href: '/context-engineering/context-management',
+        icon: Sliders,
+        color: 'from-amber-500/20 to-rose-500/10 border-amber-500/30 text-amber-400',
+        badge: 'Management',
+        formula: '\\mathcal{C}_{t+1} = \\text{Compress}(\\mathcal{C}_t \\cup \\{o_t\\}) \\; \\text{s.t.} \\; \\text{Cost}(\\mathcal{C}) \\le B',
+        desc: 'Context window utilization, sliding windows, semantic compaction, summarization, and avoiding lost-in-the-middle degradation.',
+      },
+      {
+        id: 'agentic-memory',
+        title: 'Agentic Memory',
+        subtitle: 'Episodic, Semantic, Working & Procedural Memory Systems',
+        href: '/context-engineering/agentic-memory',
+        icon: Brain,
+        color: 'from-purple-500/20 to-indigo-500/10 border-purple-500/30 text-purple-400',
+        badge: 'Memory',
+        formula: 'M_{t+1} = \\alpha M_t + (1 - \\alpha) \\text{Embed}(e_t), \\quad \\text{Recall}(q) = \\text{TopK}_{k}(M, q)',
+        desc: 'Long-term agentic memory architectures: episodic trace storage, vector memory indexing, reflection buffers, and persistent identity.',
+      },
     ],
   },
   {
@@ -329,7 +393,7 @@ export default function DashboardPage() {
             Comprehensive AI & LLM Concept Explorer
           </h1>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            Explore 19 interactive visualizers across 6 core domains: LLM Basics, RL Alignment, PEFT, Reasoning Algorithms, Adaptation, and Agentic Evaluation.
+            Explore 24 interactive visualizers across 7 core domains: LLM Basics, RL Alignment, PEFT, Reasoning Algorithms, Adaptation, Agentic Evaluation, and Context Engineering.
           </p>
         </div>
       </div>

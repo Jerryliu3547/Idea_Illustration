@@ -28,7 +28,9 @@ import {
   Zap,
   RefreshCw,
   ShieldCheck,
-  Scale
+  Scale,
+  FileText,
+  Search
 } from 'lucide-react';
 
 interface NavTreeSubItem {
@@ -236,6 +238,49 @@ const treeNavigation: NavTreeCategory[] = [
         badge: 'Actions & Trajectory',
         color: 'text-cyan-400',
       },
+      {
+        name: 'Improve in Production',
+        href: '/agentic-evaluation/improving-in-production',
+        icon: Sparkles,
+        badge: 'Production & Flywheel',
+        color: 'text-amber-400',
+      },
+    ],
+  },
+  {
+    id: 'context-engineering',
+    category: 'Context Engineering',
+    icon: Layers,
+    color: 'text-indigo-400',
+    items: [
+      {
+        name: 'Intro Context Eng',
+        href: '/context-engineering',
+        icon: FileText,
+        badge: 'Intro',
+        color: 'text-indigo-400',
+      },
+      {
+        name: 'Agentic Search',
+        href: '/context-engineering/agentic-search',
+        icon: Search,
+        badge: 'Search',
+        color: 'text-cyan-400',
+      },
+      {
+        name: 'Context Management',
+        href: '/context-engineering/context-management',
+        icon: Sliders,
+        badge: 'Management',
+        color: 'text-amber-400',
+      },
+      {
+        name: 'Agentic Memory',
+        href: '/context-engineering/agentic-memory',
+        icon: Brain,
+        badge: 'Memory',
+        color: 'text-purple-400',
+      },
     ],
   },
   {
@@ -269,6 +314,7 @@ export const Sidebar: React.FC = () => {
     'llm-self-improvement': true,
     'test-time-adaptation': true,
     'agentic-evaluation': true,
+    'context-engineering': true,
     'philosophy-of-ai': true,
   });
 
@@ -400,10 +446,10 @@ export const Sidebar: React.FC = () => {
       <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-3 text-xs text-slate-400 mt-6">
         <div className="flex items-center justify-between text-slate-300 font-medium mb-1">
           <span>Interactive Explorer</span>
-          <span className="text-cyan-400 font-mono text-[11px]">6 Core Domains</span>
+          <span className="text-cyan-400 font-mono text-[11px]">7 Core Domains</span>
         </div>
         <p className="text-[11px] leading-relaxed text-slate-500">
-          Visualizing LLM Basics, RL Alignment, PEFT, Reasoning, Adaptation & Agentic Evaluation.
+          Visualizing LLM Basics, RL Alignment, PEFT, Reasoning, Adaptation, Agentic Eval &amp; Context Eng.
         </p>
       </div>
     </div>
