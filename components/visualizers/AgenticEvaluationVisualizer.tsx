@@ -758,32 +758,32 @@ return "fail"`}</pre>
           </div>
 
           {showCodeDiagrams && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   Figure 1: Exact Match (Brittle) vs Normalized (Robust)
                 </span>
                 <Image
                   src={getAssetPath('/images/code_evaluator_robustness.jpg')}
                   alt="Exact match vs Normalized robust code evaluator"
                   width={800}
-                  height={400}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-56"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[420px]"
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   Figure 2: The 5 Core Checks (Format, Length, Forbidden, Facts vs Records, Required Steps)
                 </span>
                 <Image
                   src={getAssetPath('/images/code_evaluator_use_cases.jpg')}
                   alt="5 Core use cases of code evaluators"
                   width={800}
-                  height={400}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-56"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[420px]"
                 />
               </div>
             </div>
@@ -2249,116 +2249,116 @@ return "fail"`}</pre>
           </div>
 
           {showJudgeDiagrams && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold truncate">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   1. Role: What it evaluates
                 </span>
                 <Image
                   src={getAssetPath('/images/llm_judge_1_role.png')}
                   alt="Step 1: Role"
-                  width={600}
-                  height={300}
+                  width={800}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-48"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[440px]"
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold truncate">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   2. Criteria: How to decide
                 </span>
                 <Image
                   src={getAssetPath('/images/llm_judge_2_criteria.jpg')}
                   alt="Step 2: Criteria"
-                  width={600}
-                  height={300}
+                  width={800}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-48"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[440px]"
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold truncate">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   3. Inputs: Which information
                 </span>
                 <Image
                   src={getAssetPath('/images/llm_judge_3_inputs.jpg')}
                   alt="Step 3: Inputs"
-                  width={600}
-                  height={300}
+                  width={800}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-48"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[440px]"
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold truncate">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   4. Labeled examples: How criteria apply
                 </span>
                 <Image
                   src={getAssetPath('/images/llm_judge_4_labeled_examples.jpg')}
                   alt="Step 4: Labeled examples"
-                  width={600}
-                  height={300}
+                  width={800}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-48"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[440px]"
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold truncate">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   5. Output instructions: How to report
                 </span>
                 <Image
                   src={getAssetPath('/images/llm_judge_5_output_instructions.jpg')}
                   alt="Step 5: Output instructions"
-                  width={600}
-                  height={300}
+                  width={800}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-48"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[440px]"
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold truncate">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   Treat failures differently (Safety vs Preference)
                 </span>
                 <Image
                   src={getAssetPath('/images/llm_judge_treat_failures_differently.jpg')}
                   alt="Treat failures differently"
-                  width={600}
-                  height={300}
+                  width={800}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-48"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[440px]"
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold truncate">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   Treat rubric like code (Versioning)
                 </span>
                 <Image
                   src={getAssetPath('/images/llm_judge_versioning.jpg')}
                   alt="Treat rubric like code and manage the version"
-                  width={600}
-                  height={300}
+                  width={800}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-48"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[440px]"
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-2">
-                <span className="text-[11px] font-mono text-slate-400 block font-semibold truncate">
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+                <span className="text-xs font-mono text-slate-300 block font-semibold">
                   Judge Evaluation Metrics &amp; Checks
                 </span>
                 <Image
                   src={getAssetPath('/images/llm_judge_metrics.jpg')}
                   alt="Metrics that can measure the LLM judges"
-                  width={600}
-                  height={300}
+                  width={800}
+                  height={450}
                   unoptimized
-                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-48"
+                  className="rounded-lg w-full h-auto object-contain border border-slate-800 max-h-[440px]"
                 />
               </div>
             </div>
