@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { IntroContextEngineeringVisualizer } from '@/components/visualizers/IntroContextEngineeringVisualizer';
 import { AgenticSearchVisualizer } from '@/components/visualizers/AgenticSearchVisualizer';
+import { ContextManagementVisualizer } from '@/components/visualizers/ContextManagementVisualizer';
 
 export type ContextEngineeringTab = 'intro' | 'search' | 'management' | 'memory';
 
@@ -88,13 +89,13 @@ const tabConfig: Record<ContextEngineeringTab, {
     activeBorder: 'border-amber-500/30',
     activeText: 'text-amber-300',
     badge: 'Compaction',
-    subtitle: 'Token Budgeting, Compression, Pruning & Dynamic Assembly',
-    description: 'Techniques for managing finite context capacity: sliding windows, structured compaction, state checkpointing, and token budgeting.',
+    subtitle: 'Pruning (Deduplication, Extraction, Truncation), Compaction & Scratchpads',
+    description: 'Techniques for keeping finite context windows clean and focused: pruning via deduplicate/extract/truncate hooks, pre-hook vs. tool-triggered compaction with structured prompts, and external scratchpads with ReadScratchpad().',
     keyTopics: [
-      'Context Compaction & Semantic Pruning',
-      'Token Budgeting & Rate Management',
-      'Hierarchical Summarization',
-      'Window Sliding & State Checkpointing'
+      'Pruning: Deduplication, Extraction & Truncation',
+      'Compaction: Pre-Hook (75%) vs. Tool Trigger',
+      'Compaction Prompts & <summary> XML Tags',
+      'External Scratchpads & ReadScratchpad()'
     ],
   },
   memory: {
@@ -178,11 +179,13 @@ export const ContextEngineeringVisualizer: React.FC<ContextEngineeringVisualizer
         </div>
       </div>
 
-      {/* Tab 1 & Tab 2 Content vs Future Tab Scaffold */}
+      {/* Tab 1, Tab 2 & Tab 3 Content vs Future Tab Scaffold */}
       {activeTab === 'intro' ? (
         <IntroContextEngineeringVisualizer />
       ) : activeTab === 'search' ? (
         <AgenticSearchVisualizer />
+      ) : activeTab === 'management' ? (
+        <ContextManagementVisualizer />
       ) : (
         <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-950/70 p-8 sm:p-12 text-center space-y-5">
           <div className="inline-flex p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
