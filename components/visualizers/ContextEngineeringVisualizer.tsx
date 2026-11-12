@@ -8,16 +8,10 @@ import {
   Sliders, 
   Brain, 
   FileText, 
-  Sparkles, 
-  ArrowRight,
-  Database,
-  Cpu,
-  Bookmark,
-  Terminal,
-  CheckCircle2,
-  Clock,
-  ExternalLink
+  Clock 
 } from 'lucide-react';
+import { IntroContextEngineeringVisualizer } from '@/components/visualizers/IntroContextEngineeringVisualizer';
+import { AgenticSearchVisualizer } from '@/components/visualizers/AgenticSearchVisualizer';
 
 export type ContextEngineeringTab = 'intro' | 'search' | 'management' | 'memory';
 
@@ -52,12 +46,13 @@ const tabConfig: Record<ContextEngineeringTab, {
     activeText: 'text-indigo-300',
     badge: 'Foundations',
     subtitle: 'Core Principles & Architecture of Context Engineering',
-    description: 'Foundations of how context shapes agent reasoning, attention distribution, prompt assembly, and optimal signal-to-noise ratio.',
+    description: 'Foundations of how context shapes agent reasoning, attention distribution, multi-turn accumulation, and harness-orchestrated execution.',
     keyTopics: [
-      'Context Engineering vs. Prompt Engineering',
-      'Attention Allocation & Lost-in-the-Middle Effects',
-      'Dynamic Context Composition Pipeline',
-      'Context Window Economics & Latency Trade-offs'
+      'Three Pillars: Right Info, Right Format, Right Time',
+      'Context Accumulation Loop (Order #8934 Refund)',
+      'Failure Modes: Poisoning, Clash, Confusion, Distraction',
+      'Context Rot vs. Nominal Context Limits (20-40% Cliff)',
+      'Agent Harnesses: Tools vs. Invisible Hooks'
     ],
   },
   search: {
@@ -71,13 +66,15 @@ const tabConfig: Record<ContextEngineeringTab, {
     activeBorder: 'border-cyan-500/30',
     activeText: 'text-cyan-300',
     badge: 'Retrieval',
-    subtitle: 'Autonomous Multi-Hop Retrieval & Tool-Augmented Sourcing',
-    description: 'Methods for agents to autonomously formulate queries, execute multi-hop web/tool searches, and filter high-density evidence into context.',
+    subtitle: 'Autonomous Multi-Source Sourcing, 4 Search Strategies & Tool Registries',
+    description: 'Architectures for autonomous search: Exact, Ranked, Semantic, and Hybrid retrieval, 5-point tool definition engineering, JIT tool registries, and systematic evals.',
     keyTopics: [
-      'Multi-Hop Query Reformulation',
-      'Reranking & Dense Semantic Filtering',
-      'Tool-Augmented Grounding',
-      'Iterative Exploration vs. Exploitation'
+      'Agentic Search vs. RAG (Multi-Hop Sourcing)',
+      '4 Search Strategies: Exact, Ranked, Semantic, Hybrid',
+      'Tool Definition Engineering (5-Point Formula)',
+      'JIT Tool Registries (Token Overhead Optimization)',
+      'Troubleshooting Failures & Multi-Trial Evals',
+      'Data Prep: AST Parsing, Chunking & Metadata'
     ],
   },
   management: {
@@ -181,27 +178,33 @@ export const ContextEngineeringVisualizer: React.FC<ContextEngineeringVisualizer
         </div>
       </div>
 
-      {/* Scaffold Placeholder Card for Future Materials */}
-      <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-950/70 p-8 sm:p-12 text-center space-y-5">
-        <div className="inline-flex p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
-          <current.icon className={`h-10 w-10 ${current.color}`} />
-        </div>
+      {/* Tab 1 & Tab 2 Content vs Future Tab Scaffold */}
+      {activeTab === 'intro' ? (
+        <IntroContextEngineeringVisualizer />
+      ) : activeTab === 'search' ? (
+        <AgenticSearchVisualizer />
+      ) : (
+        <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-950/70 p-8 sm:p-12 text-center space-y-5">
+          <div className="inline-flex p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
+            <current.icon className={`h-10 w-10 ${current.color}`} />
+          </div>
 
-        <div className="max-w-xl mx-auto space-y-2">
-          <h2 className="text-xl font-bold text-white font-mono">
-            Ready for Materials: {current.title}
-          </h2>
-          <p className="text-sm text-slate-400 leading-relaxed font-sans">
-            This tab scaffold is set up and ready for your notes, screenshots, diagrams, and interactive visualizers.
-          </p>
-        </div>
+          <div className="max-w-xl mx-auto space-y-2">
+            <h2 className="text-xl font-bold text-white font-mono">
+              Ready for Materials: {current.title}
+            </h2>
+            <p className="text-sm text-slate-400 leading-relaxed font-sans">
+              This tab scaffold is set up and ready for your notes, screenshots, diagrams, and interactive visualizers.
+            </p>
+          </div>
 
-        <div className="pt-2 flex justify-center">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-            <Clock className="h-3.5 w-3.5" /> Awaiting Notes &amp; Screenshots
-          </span>
+          <div className="pt-2 flex justify-center">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+              <Clock className="h-3.5 w-3.5" /> Awaiting Notes &amp; Screenshots
+            </span>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Overview Cards of all 4 Tabs in Context Engineering */}
       <div className="space-y-4 pt-4">
