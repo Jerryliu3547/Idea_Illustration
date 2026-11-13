@@ -304,18 +304,18 @@ export const Sidebar: React.FC = () => {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Tree expansion state: Default all categories to open
+  // Tree expansion state: Default all categories to closed
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
-    'llm-basics': true,
-    'rl-in-llms': true,
-    'peft': true,
-    'training-optimization': true,
-    'reasoning': true,
-    'llm-self-improvement': true,
-    'test-time-adaptation': true,
-    'agentic-evaluation': true,
-    'context-engineering': true,
-    'philosophy-of-ai': true,
+    'llm-basics': false,
+    'rl-in-llms': false,
+    'peft': false,
+    'training-optimization': false,
+    'reasoning': false,
+    'llm-self-improvement': false,
+    'test-time-adaptation': false,
+    'agentic-evaluation': false,
+    'context-engineering': false,
+    'philosophy-of-ai': false,
   });
 
   // Auto expand category folder if user is currently visiting a route inside it
