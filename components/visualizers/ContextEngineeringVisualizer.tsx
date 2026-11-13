@@ -7,12 +7,12 @@ import {
   Search, 
   Sliders, 
   Brain, 
-  FileText, 
-  Clock 
+  FileText 
 } from 'lucide-react';
 import { IntroContextEngineeringVisualizer } from '@/components/visualizers/IntroContextEngineeringVisualizer';
 import { AgenticSearchVisualizer } from '@/components/visualizers/AgenticSearchVisualizer';
 import { ContextManagementVisualizer } from '@/components/visualizers/ContextManagementVisualizer';
+import { AgenticMemoryVisualizer } from '@/components/visualizers/AgenticMemoryVisualizer';
 
 export type ContextEngineeringTab = 'intro' | 'search' | 'management' | 'memory';
 
@@ -109,13 +109,13 @@ const tabConfig: Record<ContextEngineeringTab, {
     activeBorder: 'border-purple-500/30',
     activeText: 'text-purple-300',
     badge: 'Long-Term',
-    subtitle: 'Episodic, Semantic, Working & Procedural Memory Systems',
-    description: 'Architectures for long-term agent persistence: vector-indexed memories, reflection logs, episodic recall, and user profile adaptation.',
+    subtitle: 'Scratchpads vs. Memories, 2-Phase Writing, Retrieval & Vector Store Schema',
+    description: 'Long-term cross-session memory architectures: complementary short-term scratchpads vs. vector-store memories, 2-phase post-session writing (provenance ranking + ADD/NO-OP/UPDATE), hook vs. search_memory() retrieval, and recency/reusability metadata.',
     keyTopics: [
-      'Episodic vs. Semantic vs. Working Memory',
-      'Vector Memory Stores & Reflection Buffers',
-      'Associative Recall & Experience Replay',
-      'Persistent User & Task Personas'
+      'Scratchpads vs. Long-Term Vector Memories',
+      '2-Phase Writing: Provenance & ADD / UPDATE / NO-OP',
+      'Reading: Hook Injection vs. search_memory() Tool',
+      'Vector Store Metadata (Recency & Reusability)'
     ],
   },
 };
@@ -179,7 +179,7 @@ export const ContextEngineeringVisualizer: React.FC<ContextEngineeringVisualizer
         </div>
       </div>
 
-      {/* Tab 1, Tab 2 & Tab 3 Content vs Future Tab Scaffold */}
+      {/* All 4 Tabs in Context Engineering */}
       {activeTab === 'intro' ? (
         <IntroContextEngineeringVisualizer />
       ) : activeTab === 'search' ? (
@@ -187,26 +187,7 @@ export const ContextEngineeringVisualizer: React.FC<ContextEngineeringVisualizer
       ) : activeTab === 'management' ? (
         <ContextManagementVisualizer />
       ) : (
-        <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-950/70 p-8 sm:p-12 text-center space-y-5">
-          <div className="inline-flex p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
-            <current.icon className={`h-10 w-10 ${current.color}`} />
-          </div>
-
-          <div className="max-w-xl mx-auto space-y-2">
-            <h2 className="text-xl font-bold text-white font-mono">
-              Ready for Materials: {current.title}
-            </h2>
-            <p className="text-sm text-slate-400 leading-relaxed font-sans">
-              This tab scaffold is set up and ready for your notes, screenshots, diagrams, and interactive visualizers.
-            </p>
-          </div>
-
-          <div className="pt-2 flex justify-center">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-              <Clock className="h-3.5 w-3.5" /> Awaiting Notes &amp; Screenshots
-            </span>
-          </div>
-        </div>
+        <AgenticMemoryVisualizer />
       )}
 
       {/* Overview Cards of all 4 Tabs in Context Engineering */}
