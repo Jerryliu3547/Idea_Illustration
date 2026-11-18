@@ -162,6 +162,17 @@ const categories: ConceptCategory[] = [
         formula: '\\text{Base} \\xrightarrow{\\text{SFT}} \\pi_{\\text{SFT}} \\xrightarrow{\\text{RL}} \\pi^*_{\\text{Aligned}}',
         desc: 'Foundations of LLM post-training: pre-training vs. mid-training (languages, multimodality, long context), SFT imitation vs. RL exploration, DeepSeek-R1 multi-stage reasoning recipe, and Constitutional AI (RLAIF).',
       },
+      {
+        id: 'core-techniques',
+        title: 'Core Techniques',
+        subtitle: 'Data Splits, LoRA Memory, Verifiers, DPO & PPO/GRPO',
+        href: '/post-training/techniques',
+        icon: Sliders,
+        color: 'from-purple-500/20 to-cyan-500/10 border-purple-500/30 text-purple-400',
+        badge: 'Techniques',
+        formula: '\\mathcal{L}_{\\text{DPO}} = -\\log \\sigma\\left(\\beta \\log \\frac{\\pi_\\theta(y_w)}{\\pi_{\\text{ref}}(y_w)} - \\beta \\log \\frac{\\pi_\\theta(y_l)}{\\pi_{\\text{ref}}(y_l)}\\right)',
+        desc: 'Data splitting & MinHash anti-leakage, RL-test new reward models, tokenizer freezing, LR & LoRA memory math, programmatic verifiers, DPO derivation, and PPO vs. GRPO.',
+      },
     ],
   },
   {

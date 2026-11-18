@@ -2,10 +2,11 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { FileText, Sparkles } from 'lucide-react';
+import { FileText, Sliders, Sparkles } from 'lucide-react';
 import { IntroPostTrainingVisualizer } from '@/components/visualizers/IntroPostTrainingVisualizer';
+import { CoreTechniquesVisualizer } from '@/components/visualizers/CoreTechniquesVisualizer';
 
-export type PostTrainingTab = 'intro';
+export type PostTrainingTab = 'intro' | 'techniques';
 
 interface PostTrainingVisualizerProps {
   activeTab: PostTrainingTab;
@@ -49,6 +50,27 @@ const tabConfig: Record<
       'Frontier Pipeline: Base Model -> Fine-Tuning -> RL -> New Model',
       'Reasoning <think> Tokens & DeepSeek-R1 4-Stage Pipeline',
       'RLAIF & Constitutional AI (Critique, Revise & AI Grader)',
+    ],
+  },
+  techniques: {
+    tabNumber: 2,
+    title: 'Core Techniques',
+    shortTitle: 'Core Techniques',
+    href: '/post-training/techniques',
+    icon: Sliders,
+    color: 'text-purple-400',
+    activeBg: 'bg-purple-950/40',
+    activeBorder: 'border-purple-500/30',
+    activeText: 'text-purple-300',
+    badge: 'Techniques',
+    subtitle: 'Data Splits, Anti-Leakage, LR/LoRA Memory, Verifiers/DPO & PPO vs. GRPO',
+    description:
+      'Essential engineering techniques for post-training: train/val/test & RL-test splitting with MinHash deduplication, tokenizer/embedding freezing, LR & LoRA memory math, programmatic verifiers vs. reward models, DPO derivation, and PPO vs. GRPO.',
+    keyTopics: [
+      'Data Splits, RL-Test New RM & MinHash / Time Splitting',
+      'Tokenizer Freezing, Learning Rate Diagnostics & LoRA VRAM',
+      'GRPO Verifiers, Preference RM & Full DPO Derivation',
+      'Policy Optimization: PPO (Critic + GAE) vs. GRPO (Group Relative)',
     ],
   },
 };
@@ -126,6 +148,7 @@ export const PostTrainingVisualizer: React.FC<PostTrainingVisualizerProps> = ({ 
 
       {/* Active Tab Content */}
       {activeTab === 'intro' && <IntroPostTrainingVisualizer />}
+      {activeTab === 'techniques' && <CoreTechniquesVisualizer />}
     </div>
   );
 };

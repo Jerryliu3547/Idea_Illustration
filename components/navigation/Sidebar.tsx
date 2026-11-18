@@ -135,6 +135,13 @@ const treeNavigation: NavTreeCategory[] = [
         badge: 'Intro',
         color: 'text-indigo-400',
       },
+      {
+        name: 'Core Techniques',
+        href: '/post-training/techniques',
+        icon: Sliders,
+        badge: 'Techniques',
+        color: 'text-purple-400',
+      },
     ],
   },
   {
