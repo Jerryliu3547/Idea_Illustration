@@ -32,7 +32,7 @@ interface ConceptItem {
   icon: React.ComponentType<{ className?: string }>;
   color: string;
   badge: string;
-  formula: string;
+  formula?: string;
   desc: string;
 }
 
@@ -143,6 +143,23 @@ const categories: ConceptCategory[] = [
         badge: 'Regularization',
         formula: 'D_{\\text{KL}}(\\pi_\\theta \\parallel \\pi_{\\text{ref}}) = \\mathbb{E}\\left[\\log \\pi_\\theta(y|x) - \\log \\pi_{\\text{ref}}(y|x)\\right]',
         desc: 'Anchors the RL policy to the initial SFT reference distribution, preventing reward hacking and speech degeneration.',
+      },
+    ],
+  },
+  {
+    title: 'Post-Training',
+    subtitle: 'Post-training workflows & techniques (placeholder)',
+    badge: 'Post-Training',
+    items: [
+      {
+        id: 'post-training-placeholder',
+        title: 'Placeholder Tab',
+        subtitle: 'Coming Soon',
+        href: '/post-training',
+        icon: Sparkles,
+        color: 'from-indigo-500/20 to-purple-500/10 border-indigo-500/30 text-indigo-400',
+        badge: 'Placeholder',
+        desc: 'Placeholder tab for the Post-Training section. Materials will be added here later.',
       },
     ],
   },
@@ -444,9 +461,11 @@ export default function DashboardPage() {
                         {item.desc}
                       </p>
 
-                      <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800/80 font-mono text-xs overflow-x-auto">
-                        <MathFormula math={item.formula} />
-                      </div>
+                      {item.formula && (
+                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800/80 font-mono text-xs overflow-x-auto">
+                          <MathFormula math={item.formula} />
+                        </div>
+                      )}
                     </div>
 
                     <div className="mt-6 flex items-center justify-between pt-4 border-t border-slate-800/60 text-xs font-semibold text-indigo-400 group-hover:text-cyan-300 transition-colors">

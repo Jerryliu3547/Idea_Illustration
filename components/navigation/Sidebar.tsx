@@ -123,6 +123,21 @@ const treeNavigation: NavTreeCategory[] = [
     ],
   },
   {
+    id: 'post-training',
+    category: 'Post-Training',
+    icon: Sparkles,
+    color: 'text-indigo-400',
+    items: [
+      {
+        name: 'Placeholder Tab',
+        href: '/post-training',
+        icon: Sparkles,
+        badge: 'Coming Soon',
+        color: 'text-indigo-400',
+      },
+    ],
+  },
+  {
     id: 'peft',
     category: 'Parameter Efficient Fine-Tuning',
     icon: Layers,
@@ -308,6 +323,7 @@ export const Sidebar: React.FC = () => {
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
     'llm-basics': false,
     'rl-in-llms': false,
+    'post-training': false,
     'peft': false,
     'training-optimization': false,
     'reasoning': false,
