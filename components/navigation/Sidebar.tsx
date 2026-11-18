@@ -129,10 +129,10 @@ const treeNavigation: NavTreeCategory[] = [
     color: 'text-indigo-400',
     items: [
       {
-        name: 'Placeholder Tab',
+        name: 'Intro Post-Training',
         href: '/post-training',
-        icon: Sparkles,
-        badge: 'Coming Soon',
+        icon: FileText,
+        badge: 'Intro',
         color: 'text-indigo-400',
       },
     ],
