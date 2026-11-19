@@ -2,11 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { FileText, Sliders, Sparkles } from 'lucide-react';
+import { FileText, Scale, Sliders, Sparkles } from 'lucide-react';
 import { IntroPostTrainingVisualizer } from '@/components/visualizers/IntroPostTrainingVisualizer';
 import { CoreTechniquesVisualizer } from '@/components/visualizers/CoreTechniquesVisualizer';
+import { PostTrainingEvaluationVisualizer } from '@/components/visualizers/PostTrainingEvaluationVisualizer';
 
-export type PostTrainingTab = 'intro' | 'techniques';
+export type PostTrainingTab = 'intro' | 'techniques' | 'evaluation';
 
 interface PostTrainingVisualizerProps {
   activeTab: PostTrainingTab;
@@ -71,6 +72,28 @@ const tabConfig: Record<
       'Tokenizer Freezing, Learning Rate Diagnostics & LoRA VRAM',
       'GRPO Verifiers, Preference RM & Full DPO Derivation',
       'Policy Optimization: PPO (Critic + GAE) vs. GRPO (Group Relative)',
+    ],
+  },
+  evaluation: {
+    tabNumber: 3,
+    title: 'Evaluation',
+    shortTitle: 'Evaluation',
+    href: '/post-training/evaluation',
+    icon: Scale,
+    color: 'text-emerald-400',
+    activeBg: 'bg-emerald-950/40',
+    activeBorder: 'border-emerald-500/30',
+    activeText: 'text-emerald-300',
+    badge: 'Eval',
+    subtitle: 'Elo, pass@k vs. pass^k, Calibration (ECE), RL Monitoring, 14-Bucket Error Playbook & Red Teaming',
+    description:
+      'Comprehensive evaluation framework for post-trained models: held-out eval sets, pairwise Elo battles, pass@k vs. pass^k, calibration (ECE), latency/token efficiency, HELM & GDPval, online RL monitoring & reward hacking detection, 14-bucket error analysis, and automated red teaming.',
+    keyTopics: [
+      'Eval Sets, Pairwise Elo & pass@k vs. pass^k',
+      'Calibration (ECE), TTFT/TPOT Efficiency & HELM / GDPval',
+      '4 Online RL Monitoring Pillars, Verifiers & Reward Hacking',
+      '14-Bucket Error Analysis Playbook (SFT vs. RL Fixes)',
+      'Start Small (20 Examples) & Automated Red Teaming',
     ],
   },
 };
@@ -149,6 +172,7 @@ export const PostTrainingVisualizer: React.FC<PostTrainingVisualizerProps> = ({ 
       {/* Active Tab Content */}
       {activeTab === 'intro' && <IntroPostTrainingVisualizer />}
       {activeTab === 'techniques' && <CoreTechniquesVisualizer />}
+      {activeTab === 'evaluation' && <PostTrainingEvaluationVisualizer />}
     </div>
   );
 };

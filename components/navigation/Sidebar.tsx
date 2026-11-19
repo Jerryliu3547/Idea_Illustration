@@ -142,6 +142,13 @@ const treeNavigation: NavTreeCategory[] = [
         badge: 'Techniques',
         color: 'text-purple-400',
       },
+      {
+        name: 'Evaluation',
+        href: '/post-training/evaluation',
+        icon: Scale,
+        badge: 'Eval',
+        color: 'text-emerald-400',
+      },
     ],
   },
   {

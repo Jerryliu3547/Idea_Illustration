@@ -173,6 +173,17 @@ const categories: ConceptCategory[] = [
         formula: '\\mathcal{L}_{\\text{DPO}} = -\\log \\sigma\\left(\\beta \\log \\frac{\\pi_\\theta(y_w)}{\\pi_{\\text{ref}}(y_w)} - \\beta \\log \\frac{\\pi_\\theta(y_l)}{\\pi_{\\text{ref}}(y_l)}\\right)',
         desc: 'Data splitting & MinHash anti-leakage, RL-test new reward models, tokenizer freezing, LR & LoRA memory math, programmatic verifiers, DPO derivation, and PPO vs. GRPO.',
       },
+      {
+        id: 'post-training-evaluation',
+        title: 'Evaluation',
+        subtitle: 'Elo, pass@k vs. pass^k, ECE, RL Monitoring & Red Teaming',
+        href: '/post-training/evaluation',
+        icon: Scale,
+        color: 'from-emerald-500/20 to-teal-500/10 border-emerald-500/30 text-emerald-400',
+        badge: 'Eval',
+        formula: '\\text{ECE} = \\sum_{m=1}^{M} \\frac{|B_m|}{N} |\\text{acc}(B_m) - \\text{conf}(B_m)|',
+        desc: 'Held-out eval sets, pairwise Elo, pass@k vs. pass^k, calibration (ECE), TTFT/TPOT efficiency, HELM & GDPval, 4 RL monitoring pillars, 14-bucket error fixes, and automated red teaming.',
+      },
     ],
   },
   {
