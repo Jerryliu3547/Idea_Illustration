@@ -2,12 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { FileText, Scale, Sliders, Sparkles } from 'lucide-react';
+import { Database, FileText, Scale, Sliders, Sparkles } from 'lucide-react';
 import { IntroPostTrainingVisualizer } from '@/components/visualizers/IntroPostTrainingVisualizer';
 import { CoreTechniquesVisualizer } from '@/components/visualizers/CoreTechniquesVisualizer';
 import { PostTrainingEvaluationVisualizer } from '@/components/visualizers/PostTrainingEvaluationVisualizer';
+import { DataDrivenPostTrainingVisualizer } from '@/components/visualizers/DataDrivenPostTrainingVisualizer';
 
-export type PostTrainingTab = 'intro' | 'techniques' | 'evaluation';
+export type PostTrainingTab = 'intro' | 'techniques' | 'evaluation' | 'data-driven';
 
 interface PostTrainingVisualizerProps {
   activeTab: PostTrainingTab;
@@ -96,6 +97,27 @@ const tabConfig: Record<
       'Start Small (20 Examples) & Automated Red Teaming',
     ],
   },
+  'data-driven': {
+    tabNumber: 4,
+    title: 'Data-Driven Post-Training',
+    shortTitle: 'Data-Driven',
+    href: '/post-training/data-driven',
+    icon: Database,
+    color: 'text-amber-400',
+    activeBg: 'bg-amber-950/40',
+    activeBorder: 'border-amber-500/30',
+    activeText: 'text-amber-300',
+    badge: 'Data',
+    subtitle: 'Quality vs. Scale, Eval-First Sizing, Online/Offline Preferences, Synthetic Data & Mixing',
+    description:
+      'Data-centric engineering for post-training: why quality beats scale, eval-first base model sizing (20 to 100K) & LoRA behavior, online vs. offline preference loops, DeepSeek-R1 data orchestration, synthetic data (Constitutional AI, rejection sampling, templates), data mixing, and reward balancing.',
+    keyTopics: [
+      'Quality Over Scale, Eval-First Check & LoRA Sizing Ladder',
+      'Online vs. Offline Preference Learning & DeepSeek-R1 Pipeline',
+      'Synthetic Data: Constitutional AI, Rejection Sampling & Templates',
+      'Data Mixing (Breadth vs. Depth) & Multi-Objective Rewards',
+    ],
+  },
 };
 
 export const PostTrainingVisualizer: React.FC<PostTrainingVisualizerProps> = ({ activeTab }) => {
@@ -173,6 +195,7 @@ export const PostTrainingVisualizer: React.FC<PostTrainingVisualizerProps> = ({ 
       {activeTab === 'intro' && <IntroPostTrainingVisualizer />}
       {activeTab === 'techniques' && <CoreTechniquesVisualizer />}
       {activeTab === 'evaluation' && <PostTrainingEvaluationVisualizer />}
+      {activeTab === 'data-driven' && <DataDrivenPostTrainingVisualizer />}
     </div>
   );
 };

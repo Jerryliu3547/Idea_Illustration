@@ -30,7 +30,8 @@ import {
   ShieldCheck,
   Scale,
   FileText,
-  Search
+  Search,
+  Database
 } from 'lucide-react';
 
 interface NavTreeSubItem {
@@ -148,6 +149,13 @@ const treeNavigation: NavTreeCategory[] = [
         icon: Scale,
         badge: 'Eval',
         color: 'text-emerald-400',
+      },
+      {
+        name: 'Data-Driven Post-Training',
+        href: '/post-training/data-driven',
+        icon: Database,
+        badge: 'Data',
+        color: 'text-amber-400',
       },
     ],
   },

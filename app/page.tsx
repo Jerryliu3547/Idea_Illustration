@@ -21,7 +21,8 @@ import {
   RefreshCw,
   Scale,
   FileText,
-  Search
+  Search,
+  Database
 } from 'lucide-react';
 
 interface ConceptItem {
@@ -183,6 +184,17 @@ const categories: ConceptCategory[] = [
         badge: 'Eval',
         formula: '\\text{ECE} = \\sum_{m=1}^{M} \\frac{|B_m|}{N} |\\text{acc}(B_m) - \\text{conf}(B_m)|',
         desc: 'Held-out eval sets, pairwise Elo, pass@k vs. pass^k, calibration (ECE), TTFT/TPOT efficiency, HELM & GDPval, 4 RL monitoring pillars, 14-bucket error fixes, and automated red teaming.',
+      },
+      {
+        id: 'data-driven-post-training',
+        title: 'Data-Driven Post-Training',
+        subtitle: 'Quality Sizing, Online/Offline, Synthetic Data & Mixing',
+        href: '/post-training/data-driven',
+        icon: Database,
+        color: 'from-amber-500/20 to-orange-500/10 border-amber-500/30 text-amber-400',
+        badge: 'Data',
+        formula: 'R = 0.4\\,\\text{helpfulness} + 0.4\\,\\text{safety} + 0.2\\,\\text{truthfulness}',
+        desc: 'Eval-first data sizing (20 to 100K), LoRA rank behavior, online vs. offline preference loops, DeepSeek-R1 data pipeline, Constitutional AI & rejection sampling, templates, data mixing, and reward balancing.',
       },
     ],
   },
